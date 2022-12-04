@@ -113,7 +113,7 @@ def conta(codice: str, verbose: bool = True):
 		for k in ret:
 			if ret[k] == 0 and k in ['U', 'T']:
 				continue
-			print(f"Base azotata: {name_mapping[k]}({k}) numero occorrenze: {ret[k]} frequenza: {round(ret[k]*1.0/sum(ret.values())*100, 3)}")
+			print(f"Nucleobases: {name_mapping[k]}({k}) count: {ret[k]} frequency: {round(ret[k]*1.0/sum(ret.values())*100, 3)}")
 
 	return ret
 
