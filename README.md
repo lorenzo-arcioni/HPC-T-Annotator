@@ -44,7 +44,7 @@ pip install PySide2
 ```
 
 ## Running
-#### Options
+### Options
 There are several options available
 ##### Mandatory options
 
@@ -116,6 +116,7 @@ It will return a table like this:
 |7032345    |    g100_usr_prod          |            PA_proc-0 | larcioni | PENDING   |   0:00  |  4:00:00   |   1 | (Priority)|
 |7032344    |    g100_usr_prod          |            PA_proc-4 | larcioni | RUNNING   |   56:30  |  4:00:00   |   1 | Node2|
 |7032343    |    g100_usr_prod          |            PA_proc-1 | larcioni | RUNNING   |   1:54:43  |  4:00:00   |   1 | Node1|
+
 It will not return the estimated end-of-calculation time as it cannot be determined a priori (because it depends on the system's workload). 
 
 There is also a useful built-in tool for error checking that tests the input sequences, the partial inputs and outputs file and the final output, in this way we are sure that all input sequences were analysed.
