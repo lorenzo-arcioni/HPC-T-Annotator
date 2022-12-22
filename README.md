@@ -54,7 +54,7 @@ There are several options available
     Path to the database file. 
 - `-b <binary>`
     Path to the binary file (Diamond or BLAST). 
-- `-t <functions>`
+- `-t <function>`
     blastp and blastx are available.
 - `-a <anaconda_module_name>`
     The name of the Anaconda module on the Slurm HPC system.
@@ -78,17 +78,17 @@ Simply add the options in the respective file, depending on which tool you are u
 - `blast_additional_options.txt`
 - `diamond_additional_options.txt`
 
-For example in the diamond_additional_options file we can insert:
+For example in the diamond additional options file we can insert:
 ```sh
 --ultra-sensitive --quiet
 ```
 It is mandatory to enter the options all on one line.
 
-#### Script configuration file
+### Script configuration file
 In the programme, in the **Bases** directory, there is also a file that allows the configuration of scripts that will launch BLAST/Diamond processes with customised Slurm settings, such as the estimated execution time, the threads available to the software and the RAM memory dedicated to each job. This file is: 
 - `script_base.txt`
 
-#### Command-line example
+### Command-line example
 A command-line example using the diamond suite.
 ```sh
 ./main.sh -i ../project/assembly/slow_fast_degs_hs.fasta -b ./BANCHE_OMOLOGY/diamond -t blastx -D -a anaconda3 -d ./BANCHE_OMOLOGY/NR/nr.dmnd -p 50
@@ -102,7 +102,7 @@ An other example using the BLAST
 
 In this case we have split the computation into 100 jobs using the BLAST suite.
 
-#### Monitoring and error checking
+### Monitoring and error checking
 During the computation, its status can be monitored via the script.
 ```sh
 ./monitor.sh
@@ -127,8 +127,13 @@ An other useful script allows to check for Slurm errors:
 ```
 It also allows processes that resulted in an error to be re-executed.
 
-#### Log file
+### Log file
 The software generates a log file, **general.log**, that contains all the information about all the computations performed, allowing the user to have a broad overview of how to adjust the waiting time and memory of the individual process. 
+## Algorithm structure
+The operation of the application, at a high level, can be summarised as follows: the master node, after analysing the input file, generates dynamic software according to the characteristics of the input, which will then be executed by the slaves nodes. Once the slaves are started, a further software will manage the control of the entire application; taking care of intervening when all the nodes have completed their computation and merging all the partial results obtained, as well as carrying out tests that, if passed, guarantee the correctness of the calculation. The control software will carry out statistics on the time taken by each node (actual and real) and on the general calculation time.
+
+![alt text](https://github.com/lorenzo-arcioni/HPC-Annotator/blob/main/Images/Logic-diagram.png)
+
 
 ## License
 
