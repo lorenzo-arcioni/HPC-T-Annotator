@@ -132,7 +132,7 @@ The software generates a log file, **general.log**, that contains all the inform
 ## Algorithm structure
 The operation of the application, at a high level, can be summarised as follows: the master node, after analysing the input file, generates dynamic software according to the characteristics of the input, which will then be executed by the slaves nodes. Once the slaves are started, a further software will manage the control of the entire application; taking care of intervening when all the nodes have completed their computation and merging all the partial results obtained, as well as carrying out tests that, if passed, guarantee the correctness of the calculation. The control software will carry out statistics on the time taken by each node (actual and real) and on the general calculation time.
 
-![alt text](https://github.com/lorenzo-arcioni/HPC-Annotator/blob/main/Images/Logic-diagram.png =992x1516)
+<img src="https://github.com/lorenzo-arcioni/HPC-Annotator/blob/main/Images/Logic-diagram.png" alt="Logic-diagram" style="height:50%; width:50%;"/>
 
 
 ## License
