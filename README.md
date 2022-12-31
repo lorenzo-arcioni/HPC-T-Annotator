@@ -1,11 +1,12 @@
-# HPC Annotator
+# HPC-Annotator
 ## Introduction
 
-HPC Parallel Annotator is a parallelization tool that increases the performance of BLAST and Diamond software. The key features are:
+HPC Annotator is a parallelization tool that increases the performance of BLAST and Diamond annotation software. 
+The key features are:
 
--   Splits the input Multi-FASTA file into more partials Multi-FASTAs.
--   Run simultaneously BLAST/Diamond sequence aligner for protein and translated DNA searches on HPC machine.
--   Gather all partials outputs from the BLAST/Diamond and give the final result.
+-   Splits the Multi-FASTA input file into more partials Multi-FASTAs.
+-   Run simultaneously BLAST/Diamond sequence aligner for protein and translated DNA searches on HPC machine on partials inputs.
+-   Gather and merge all partials outputs from the BLAST/Diamond and give the final result.
 -   Provide a GUI that allows to generate dynamic scripts for the computation.
 
 The software was developed to be used on large clusters with high performance and not overloaded. If the cluster where it runs is overloaded and the jobs fail to start simultaneously, there will be a considerable degradation in performance.
@@ -30,9 +31,7 @@ Reinstalling the application may fix this problem.
 The following commands will solve.
 
 ```sh
-p={path of libxcb-util.so.0}
-d={directory path of libxcb-util.so.0}
-sudo ln -s $p $d/libxcb-util.so.1
+sudo ln -s path/to/libxcb-util.so.0 /path/to/libxcb-util.so.1
 ```
 Make sure that the Anaconda module is available on your system.
 
@@ -62,14 +61,15 @@ There are several options available
 ##### Other options
 
 - `-p <number_of_processes>`
-    Number of MPI processes to generate. 
+    Number of MPI processes to generate. Consider that the higher the number of processes, the more time will be needed for pre-processing. A range from 5 to 500 is recommended. Note that the number of processes must never exceed the number of sequences.
 - `-f <6_BLAST_outformat>`
     The 6th tabular BLAST outformat, for example:
     ```sh
     -f "6 qseqid sseqid slen qstart qend length mismatch gapopen gaps sseq"
     ```
+    Make sure that the required information is present in the database. 
 - `-D`
-    If we intend to use the Diamond software. 
+    If we want to use the Diamond software. 
 
 #### BLAST/Diamond further options
 It is of course possible to give further options to the BLAST and Diamond software, this is done via prepared files located in the **Bases** directory.
@@ -101,15 +101,25 @@ An other example using the BLAST
 ```
 
 In this case we have split the computation into 100 jobs using the BLAST suite.
+### Running the GUI-generated scripts
+If you generated the tar archive using the GUI, simply upload the tar file into an (empty) directory of the HPC filesystem, and then execute the following command.
+```sh
+tar -zxf hpc_annotator.tar.gz && chmod 777 *.[sp][hy] && dos2unix *.sh
+```
+Once this is done, you have everything you need to manage and start the computation, so all you have to do is run:
 
+```sh
+sbatch start.sh
+```
+At the end of the calculation, the output will be in the tmp directory with the name final_blast.tsv.
 ### Monitoring and error checking
 During the computation, its status can be monitored via the script.
 ```sh
 ./monitor.sh
 ```
 It will return a table like this:
-|JOBID|PARTITION|NAME|USER|STATE|TIME|TIME_LIMI|NODES|NODELIST(REASON)|
-| --- | ------- | -- | -- | --- | -- | ------- | --- | -------------- |
+|JOBID|PARTITION|NAME|USER|STATE|TIME|TIME_LIMIT|NODES|NODELIST(REASON)|
+| --- | ------- | -- | -- | --- | -- | -------- | --- | -------------- |
 |7032348    |  g100_all_serial          |      PA_proc-control | larcioni | RUNNING   |   0:04  |  4:00:00   |   1 | login10   |
 |7032347    |    g100_usr_prod          |            PA_proc-3 | larcioni | PENDING   |   0:00  |  4:00:00   |   1 | (Priority)|
 |7032346    |    g100_usr_prod          |            PA_proc-2 | larcioni | PENDING   |   0:00  |  4:00:00   |   1 | (Priority)|
@@ -132,8 +142,9 @@ The software generates a log file, **general.log**, that contains all the inform
 ## Algorithm structure
 The operation of the application, at a high level, can be summarised as follows: the master node, after analysing the input file, generates dynamic software according to the characteristics of the input, which will then be executed by the slaves nodes. Once the slaves are started, a further software will manage the control of the entire application; taking care of intervening when all the nodes have completed their computation and merging all the partial results obtained, as well as carrying out tests that, if passed, guarantee the correctness of the calculation. The control software will carry out statistics on the time taken by each node (actual and real) and on the general calculation time.
 
-<p align="center"><img src="https://github.com/lorenzo-arcioni/HPC-Annotator/blob/main/Images/Logic-diagram.png" alt="Logic-diagram" style="height:50%; width:50%;"/></p>
+<p align="center"><img src="https://github.com/lorenzo-arcioni/HPC-Annotator/blob/main/Images/Logic-diagram.png" alt="Logic-diagram" style="height:60%; width:60%;"/></p>
 
+## Benchmarks
 
 ## License
 
