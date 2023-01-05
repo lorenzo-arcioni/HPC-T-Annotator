@@ -48,6 +48,7 @@ echo "Ending timestamp#"$date2 >> ./general.log
 secs=$(($(date -d "$date2" +'%s') - $(date -d "$date1" +'%s')))
 echo "Total elapsed time: "$(printf '%dd:%dh:%dm:%ds\n' $((secs/86400)) $((secs%86400/3600)) $((secs%3600/60))   $((secs%60))) >> ./general.log
 ./checker.sh input/input.fa > ./errors.log
+
 echo '-------------------------------------------------' >> ./general.log
 #mail -s 'Computazione ultimata' lorenzo.arcioni2000@gmail.com <<< $(tail -8 ./general.log)$'\n'$(cat errors.log)
 

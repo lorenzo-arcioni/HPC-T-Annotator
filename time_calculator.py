@@ -33,9 +33,9 @@ def main():
 	smed = stot // len(tmpdir_folders)
 	
 	#Write all data in the logfile
-	print("Average runtime: " + str(datetime.timedelta(seconds=smed)) + "\n")
-	print("Max runtime: " + str(datetime.timedelta(seconds=max_time)) + "\n")
-	print("Min runtime: " + str(datetime.timedelta(seconds=min_time)) + "\n")
+	print("Average runtime: " + str(datetime.timedelta(seconds=smed)))
+	print("Max runtime: " + str(datetime.timedelta(seconds=max_time)))
+	print("Min runtime: " + str(datetime.timedelta(seconds=min_time)))
 							
 				
 				
