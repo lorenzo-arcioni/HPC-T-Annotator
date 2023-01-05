@@ -15,7 +15,7 @@ class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.setEnabled(True)
-        MainWindow.resize(1229, 902)
+        MainWindow.resize(1229, 964)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Preferred)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -84,7 +84,7 @@ class Ui_MainWindow(object):
 "\n"
 "/* COMBOBOX */\n"
 "QComboBox{\n"
-"    background-color: rgb(41, 65, 131);;\n"
+"    background-color: rgb(250,250,250);\n"
 "    border-radius: 5px;\n"
 "    border: 2px solid rgb(105,105,105);\n"
 "    padding: 5px;\n"
@@ -351,121 +351,59 @@ class Ui_MainWindow(object):
         self.serial_partition.setObjectName("serial_partition")
         self.gridLayout.addWidget(self.serial_partition, 0, 3, 1, 1)
         self.verticalLayout_7.addLayout(self.gridLayout)
-        self.frame_div_content_2 = QtWidgets.QFrame(self.centralwidget)
-        self.frame_div_content_2.setGeometry(QtCore.QRect(0, 520, 1231, 360))
-        self.frame_div_content_2.setMinimumSize(QtCore.QSize(0, 110))
-        self.frame_div_content_2.setMaximumSize(QtCore.QSize(16777215, 400))
-        self.frame_div_content_2.setStyleSheet("background-color: rgb(250,250,250);\n"
-"\n"
-"")
-        self.frame_div_content_2.setFrameShape(QtWidgets.QFrame.NoFrame)
-        self.frame_div_content_2.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.image_settings = QtWidgets.QLabel(self.centralwidget)
+        self.image_settings.setGeometry(QtCore.QRect(0, 60, 1231, 91))
+        self.image_settings.setStyleSheet("background-image: url(:/root/icons/settings.jpg);")
+        self.image_settings.setText("")
+        self.image_settings.setObjectName("image_settings")
+        self.image_software = QtWidgets.QLabel(self.centralwidget)
+        self.image_software.setGeometry(QtCore.QRect(0, 430, 1231, 91))
+        self.image_software.setStyleSheet("background-image: url(:/root/icons/dna.png);")
+        self.image_software.setText("")
+        self.image_software.setObjectName("image_software")
+        self.verticalFrame = QtWidgets.QFrame(self.centralwidget)
+        self.verticalFrame.setGeometry(QtCore.QRect(0, 520, 1231, 421))
+        self.verticalFrame.setStyleSheet("background-color: rgb(250,250,250);")
+        self.verticalFrame.setObjectName("verticalFrame")
+        self.frame_div_content_2 = QtWidgets.QVBoxLayout(self.verticalFrame)
         self.frame_div_content_2.setObjectName("frame_div_content_2")
-        self.verticalLayout_8 = QtWidgets.QVBoxLayout(self.frame_div_content_2)
-        self.verticalLayout_8.setContentsMargins(0, 0, 0, 0)
-        self.verticalLayout_8.setSpacing(0)
-        self.verticalLayout_8.setObjectName("verticalLayout_8")
         self.gridLayout_2 = QtWidgets.QGridLayout()
         self.gridLayout_2.setObjectName("gridLayout_2")
-        self.input_path = QtWidgets.QLineEdit(self.frame_div_content_2)
+        self.tools = QtWidgets.QComboBox(self.verticalFrame)
+        self.tools.setObjectName("tools")
+        self.gridLayout_2.addWidget(self.tools, 7, 1, 1, 1)
+        self.bin_path = QtWidgets.QComboBox(self.verticalFrame)
+        self.bin_path.setObjectName("bin_path")
+        self.gridLayout_2.addWidget(self.bin_path, 4, 2, 1, 1)
+        self.input_path = QtWidgets.QLineEdit(self.verticalFrame)
         self.input_path.setInputMask("")
         self.input_path.setObjectName("input_path")
-        self.gridLayout_2.addWidget(self.input_path, 4, 1, 1, 1)
-        self.label_14 = QtWidgets.QLabel(self.frame_div_content_2)
-        self.label_14.setStyleSheet("font: 12pt \"Arkhip\";")
-        self.label_14.setObjectName("label_14")
-        self.gridLayout_2.addWidget(self.label_14, 0, 1, 1, 1)
-        self.label_10 = QtWidgets.QLabel(self.frame_div_content_2)
-        self.label_10.setText("")
-        self.label_10.setObjectName("label_10")
-        self.gridLayout_2.addWidget(self.label_10, 0, 0, 1, 1)
-        self.label_17 = QtWidgets.QLabel(self.frame_div_content_2)
-        self.label_17.setStyleSheet("")
-        self.label_17.setObjectName("label_17")
-        self.gridLayout_2.addWidget(self.label_17, 1, 1, 1, 1)
-        self.label_12 = QtWidgets.QLabel(self.frame_div_content_2)
-        self.label_12.setStyleSheet("")
-        self.label_12.setObjectName("label_12")
-        self.gridLayout_2.addWidget(self.label_12, 3, 1, 1, 1)
-        self.label_15 = QtWidgets.QLabel(self.frame_div_content_2)
-        self.label_15.setText("")
-        self.label_15.setObjectName("label_15")
-        self.gridLayout_2.addWidget(self.label_15, 1, 2, 1, 1)
-        self.label_16 = QtWidgets.QLabel(self.frame_div_content_2)
-        self.label_16.setMinimumSize(QtCore.QSize(5, 0))
-        self.label_16.setText("")
-        self.label_16.setObjectName("label_16")
-        self.gridLayout_2.addWidget(self.label_16, 1, 4, 1, 1)
-        self.reset = QtWidgets.QPushButton(self.frame_div_content_2)
-        self.reset.setMinimumSize(QtCore.QSize(50, 30))
-        self.reset.setStyleSheet("QPushButton {\n"
-"    color: white;\n"
-"    border: 2px solid rgba(0,45,48,255);\n"
-"    border-radius: 5px;    \n"
-"    background-color: rgba(0,45,48,255);\n"
-"}\n"
-"QPushButton:hover {\n"
-"    background-color: rgb(4,76,82);\n"
-"    border: 2px solid rgb(4,76,82);\n"
-"}\n"
-"QPushButton:pressed {    \n"
-"    background-color: rgb(35, 40, 49);\n"
-"    border: 2px solid rgb(43, 50, 61);\n"
-"}")
-        self.reset.setObjectName("reset")
-        self.gridLayout_2.addWidget(self.reset, 11, 1, 1, 1)
-        self.horizontalLayout = QtWidgets.QHBoxLayout()
-        self.horizontalLayout.setObjectName("horizontalLayout")
-        self.diamond = QtWidgets.QRadioButton(self.frame_div_content_2)
-        self.diamond.setObjectName("diamond")
-        self.horizontalLayout.addWidget(self.diamond)
-        self.blast = QtWidgets.QRadioButton(self.frame_div_content_2)
-        self.blast.setObjectName("blast")
-        self.horizontalLayout.addWidget(self.blast)
-        self.gridLayout_2.addLayout(self.horizontalLayout, 2, 1, 1, 1)
-        self.start = QtWidgets.QPushButton(self.frame_div_content_2)
-        self.start.setMinimumSize(QtCore.QSize(0, 30))
-        self.start.setStyleSheet("QPushButton {\n"
-"    color: white;\n"
-"    border: 2px solid rgba(0,45,48,255);\n"
-"    border-radius: 5px;    \n"
-"    background-color: rgba(0,45,48,255);\n"
-"}\n"
-"QPushButton:hover {\n"
-"    background-color: rgb(4,76,82);\n"
-"    border: 2px solid rgb(4,76,82);\n"
-"}\n"
-"QPushButton:pressed {    \n"
-"    background-color: rgb(35, 40, 49);\n"
-"    border: 2px solid rgb(43, 50, 61);\n"
-"}")
-        self.start.setObjectName("start")
-        self.gridLayout_2.addWidget(self.start, 11, 3, 1, 1)
-        self.label_18 = QtWidgets.QLabel(self.frame_div_content_2)
-        self.label_18.setStyleSheet("")
-        self.label_18.setObjectName("label_18")
-        self.gridLayout_2.addWidget(self.label_18, 0, 3, 1, 1)
-        self.db_path = QtWidgets.QComboBox(self.frame_div_content_2)
-        self.db_path.setObjectName("db_path")
-        self.gridLayout_2.addWidget(self.db_path, 1, 3, 1, 1)
-        self.bin_path = QtWidgets.QComboBox(self.frame_div_content_2)
-        self.bin_path.setObjectName("bin_path")
-        self.gridLayout_2.addWidget(self.bin_path, 3, 3, 1, 1)
-        self.label_13 = QtWidgets.QLabel(self.frame_div_content_2)
-        self.label_13.setStyleSheet("")
-        self.label_13.setObjectName("label_13")
-        self.gridLayout_2.addWidget(self.label_13, 2, 3, 1, 1)
-        self.label_23 = QtWidgets.QLabel(self.frame_div_content_2)
+        self.gridLayout_2.addWidget(self.input_path, 5, 1, 1, 1)
+        self.label_20 = QtWidgets.QLabel(self.verticalFrame)
+        self.label_20.setObjectName("label_20")
+        self.gridLayout_2.addWidget(self.label_20, 5, 2, 1, 1)
+        self.label_23 = QtWidgets.QLabel(self.verticalFrame)
         self.label_23.setObjectName("label_23")
         self.gridLayout_2.addWidget(self.label_23, 6, 1, 1, 1)
-        self.tools = QtWidgets.QComboBox(self.frame_div_content_2)
-        self.tools.setObjectName("tools")
-        self.gridLayout_2.addWidget(self.tools, 8, 1, 1, 1)
-        self.outfmt = QtWidgets.QLineEdit(self.frame_div_content_2)
-        self.outfmt.setMinimumSize(QtCore.QSize(0, 30))
-        self.outfmt.setObjectName("outfmt")
-        self.gridLayout_2.addWidget(self.outfmt, 6, 3, 1, 1)
-        self.pa_env = QtWidgets.QCheckBox(self.frame_div_content_2)
+        self.label_13 = QtWidgets.QLabel(self.verticalFrame)
+        self.label_13.setMaximumSize(QtCore.QSize(16777215, 30))
+        self.label_13.setStyleSheet("")
+        self.label_13.setObjectName("label_13")
+        self.gridLayout_2.addWidget(self.label_13, 3, 2, 1, 1)
+        self.label_17 = QtWidgets.QLabel(self.verticalFrame)
+        self.label_17.setStyleSheet("")
+        self.label_17.setObjectName("label_17")
+        self.gridLayout_2.addWidget(self.label_17, 2, 1, 1, 1)
+        self.horizontalLayout = QtWidgets.QHBoxLayout()
+        self.horizontalLayout.setObjectName("horizontalLayout")
+        self.diamond = QtWidgets.QRadioButton(self.verticalFrame)
+        self.diamond.setObjectName("diamond")
+        self.horizontalLayout.addWidget(self.diamond)
+        self.blast = QtWidgets.QRadioButton(self.verticalFrame)
+        self.blast.setObjectName("blast")
+        self.horizontalLayout.addWidget(self.blast)
+        self.gridLayout_2.addLayout(self.horizontalLayout, 3, 1, 1, 1)
+        self.pa_env = QtWidgets.QCheckBox(self.verticalFrame)
         self.pa_env.setMinimumSize(QtCore.QSize(0, 40))
         self.pa_env.setStyleSheet("\n"
 "  QCheckBox {\n"
@@ -491,31 +429,83 @@ class Ui_MainWindow(object):
 "\n"
 "")
         self.pa_env.setObjectName("pa_env")
-        self.gridLayout_2.addWidget(self.pa_env, 10, 3, 1, 1)
-        self.label_20 = QtWidgets.QLabel(self.frame_div_content_2)
-        self.label_20.setObjectName("label_20")
-        self.gridLayout_2.addWidget(self.label_20, 4, 3, 1, 1)
-        self.anaconda = QtWidgets.QLabel(self.frame_div_content_2)
+        self.gridLayout_2.addWidget(self.pa_env, 8, 2, 1, 1)
+        self.db_path = QtWidgets.QComboBox(self.verticalFrame)
+        self.db_path.setStyleSheet("")
+        self.db_path.setObjectName("db_path")
+        self.gridLayout_2.addWidget(self.db_path, 2, 2, 1, 1)
+        self.anaconda = QtWidgets.QLabel(self.verticalFrame)
         self.anaconda.setMinimumSize(QtCore.QSize(0, 30))
         self.anaconda.setStyleSheet("color: rgb(120, 120, 120);")
         self.anaconda.setObjectName("anaconda")
-        self.gridLayout_2.addWidget(self.anaconda, 8, 3, 1, 1)
-        self.label_22 = QtWidgets.QLabel(self.frame_div_content_2)
-        self.label_22.setMaximumSize(QtCore.QSize(16777215, 10))
-        self.label_22.setText("")
-        self.label_22.setObjectName("label_22")
-        self.gridLayout_2.addWidget(self.label_22, 12, 1, 1, 1)
-        self.verticalLayout_8.addLayout(self.gridLayout_2)
-        self.image_settings = QtWidgets.QLabel(self.centralwidget)
-        self.image_settings.setGeometry(QtCore.QRect(0, 60, 1231, 91))
-        self.image_settings.setStyleSheet("background-image: url(:/root/icons/settings.jpg);")
-        self.image_settings.setText("")
-        self.image_settings.setObjectName("image_settings")
-        self.image_software = QtWidgets.QLabel(self.centralwidget)
-        self.image_software.setGeometry(QtCore.QRect(0, 430, 1231, 91))
-        self.image_software.setStyleSheet("background-image: url(:/root/icons/dna.png);")
-        self.image_software.setText("")
-        self.image_software.setObjectName("image_software")
+        self.gridLayout_2.addWidget(self.anaconda, 7, 2, 1, 1)
+        self.label_12 = QtWidgets.QLabel(self.verticalFrame)
+        self.label_12.setStyleSheet("")
+        self.label_12.setObjectName("label_12")
+        self.gridLayout_2.addWidget(self.label_12, 4, 1, 1, 1)
+        self.outfmt = QtWidgets.QLineEdit(self.verticalFrame)
+        self.outfmt.setMinimumSize(QtCore.QSize(0, 30))
+        self.outfmt.setObjectName("outfmt")
+        self.gridLayout_2.addWidget(self.outfmt, 6, 2, 1, 1)
+        self.label_18 = QtWidgets.QLabel(self.verticalFrame)
+        self.label_18.setMinimumSize(QtCore.QSize(0, 31))
+        self.label_18.setStyleSheet("")
+        self.label_18.setObjectName("label_18")
+        self.gridLayout_2.addWidget(self.label_18, 1, 2, 1, 1)
+        self.start = QtWidgets.QPushButton(self.verticalFrame)
+        self.start.setMinimumSize(QtCore.QSize(0, 30))
+        self.start.setStyleSheet("QPushButton {\n"
+"    color: white;\n"
+"    border: 2px solid rgba(0,45,48,255);\n"
+"    border-radius: 5px;    \n"
+"    background-color: rgba(0,45,48,255);\n"
+"}\n"
+"QPushButton:hover {\n"
+"    background-color: rgb(4,76,82);\n"
+"    border: 2px solid rgb(4,76,82);\n"
+"}\n"
+"QPushButton:pressed {    \n"
+"    background-color: rgb(35, 40, 49);\n"
+"    border: 2px solid rgb(43, 50, 61);\n"
+"}")
+        self.start.setObjectName("start")
+        self.gridLayout_2.addWidget(self.start, 9, 2, 1, 1)
+        self.reset = QtWidgets.QPushButton(self.verticalFrame)
+        self.reset.setMinimumSize(QtCore.QSize(50, 30))
+        self.reset.setStyleSheet("QPushButton {\n"
+"    color: white;\n"
+"    border: 2px solid rgba(0,45,48,255);\n"
+"    border-radius: 5px;    \n"
+"    background-color: rgba(0,45,48,255);\n"
+"}\n"
+"QPushButton:hover {\n"
+"    background-color: rgb(4,76,82);\n"
+"    border: 2px solid rgb(4,76,82);\n"
+"}\n"
+"QPushButton:pressed {    \n"
+"    background-color: rgb(35, 40, 49);\n"
+"    border: 2px solid rgb(43, 50, 61);\n"
+"}")
+        self.reset.setObjectName("reset")
+        self.gridLayout_2.addWidget(self.reset, 9, 1, 1, 1)
+        self.label_10 = QtWidgets.QLabel(self.verticalFrame)
+        self.label_10.setObjectName("label_10")
+        self.gridLayout_2.addWidget(self.label_10, 1, 0, 1, 1)
+        self.label_15 = QtWidgets.QLabel(self.verticalFrame)
+        self.label_15.setObjectName("label_15")
+        self.gridLayout_2.addWidget(self.label_15, 1, 3, 1, 1)
+        self.label_14 = QtWidgets.QLabel(self.verticalFrame)
+        self.label_14.setMinimumSize(QtCore.QSize(0, 30))
+        self.label_14.setMaximumSize(QtCore.QSize(16777215, 40))
+        self.label_14.setStyleSheet("font: 12pt \"Arkhip\";")
+        self.label_14.setObjectName("label_14")
+        self.gridLayout_2.addWidget(self.label_14, 0, 1, 1, 1)
+        self.label_16 = QtWidgets.QLabel(self.verticalFrame)
+        self.label_16.setMaximumSize(QtCore.QSize(16777215, 3))
+        self.label_16.setText("")
+        self.label_16.setObjectName("label_16")
+        self.gridLayout_2.addWidget(self.label_16, 1, 1, 1, 1)
+        self.frame_div_content_2.addLayout(self.gridLayout_2)
         MainWindow.setCentralWidget(self.centralwidget)
         self.statusbar = QtWidgets.QStatusBar(MainWindow)
         self.statusbar.setObjectName("statusbar")
@@ -539,19 +529,21 @@ class Ui_MainWindow(object):
         self.label_5.setText(_translate("MainWindow", "Wall time (expected runtime of each process in hours)"))
         self.serial_partition.setText(_translate("MainWindow", "Invalid serial partition:"))
         self.input_path.setText(_translate("MainWindow", "/path/to/query.fasta"))
-        self.label_14.setText(_translate("MainWindow", "Software settings"))
+        self.label_20.setText(_translate("MainWindow", "Blast output format: es. (\"6 qseqid sseqid slen gaps sseq\")"))
+        self.label_23.setText(_translate("MainWindow", "Select the Diamond function"))
+        self.label_13.setText(_translate("MainWindow", "Binary path (the absolute binary path to use in the HPC filesystem)"))
         self.label_17.setText(_translate("MainWindow", "Select the software to use"))
-        self.label_12.setText(_translate("MainWindow", "Input path (the absolute inputh path to use in the HPC filesystem)"))
-        self.reset.setText(_translate("MainWindow", "Reset"))
         self.diamond.setText(_translate("MainWindow", "Diamond"))
         self.blast.setText(_translate("MainWindow", "Blast"))
-        self.start.setText(_translate("MainWindow", "Start"))
-        self.label_18.setText(_translate("MainWindow", "Database path (the absolute database path to use in the HPC filesystem)"))
-        self.label_13.setText(_translate("MainWindow", "Binary path (the absolute binary path to use in the HPC filesystem)"))
-        self.label_23.setText(_translate("MainWindow", "Select the Diamond function"))
         self.pa_env.setText(_translate("MainWindow", "Include Anaconda Env"))
-        self.label_20.setText(_translate("MainWindow", "Blast output format: es. (\"6 qseqid sseqid slen gaps sseq\")"))
         self.anaconda.setText(_translate("MainWindow", "Invalid Anaconda module:"))
+        self.label_12.setText(_translate("MainWindow", "Input path (the absolute inputh path to use in the HPC filesystem)"))
+        self.label_18.setText(_translate("MainWindow", "Database path (the absolute database path to use in the HPC filesystem)"))
+        self.start.setText(_translate("MainWindow", "Start"))
+        self.reset.setText(_translate("MainWindow", "Reset"))
+        self.label_10.setText(_translate("MainWindow", " "))
+        self.label_15.setText(_translate("MainWindow", " "))
+        self.label_14.setText(_translate("MainWindow", "Software settings"))
 import resources_rc
 
 

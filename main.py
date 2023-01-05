@@ -41,7 +41,11 @@ class SplashWindow(QtWidgets.QMainWindow):
             QtCore.Qt.FramelessWindowHint
         )
         self.MainWindow.setAttribute(QtCore.Qt.WA_TranslucentBackground)
-        self.MainWindow.setFixedSize(1238, 900)
+        self.MainWindow.setFixedSize(1238, 1000)
+        qr = self.MainWindow.frameGeometry()
+        cp = QtWidgets.QDesktopWidget().availableGeometry().center()
+        qr.moveCenter(cp)
+        self.MainWindow.move(qr.topLeft())
         self.MainWindow.show()
         self.Main_window_load()
     

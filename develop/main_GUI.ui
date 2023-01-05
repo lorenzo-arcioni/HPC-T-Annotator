@@ -10,7 +10,7 @@
     <x>0</x>
     <y>0</y>
     <width>1229</width>
-    <height>902</height>
+    <height>964</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -94,7 +94,7 @@ QRadioButton::indicator:checked {
 
 /* COMBOBOX */
 QComboBox{
-	background-color: rgb(41, 65, 131);;
+	background-color: rgb(250,250,250);
 	border-radius: 5px;
 	border: 2px solid rgb(105,105,105);
 	padding: 5px;
@@ -633,57 +633,60 @@ QPushButton:pressed {
      </item>
     </layout>
    </widget>
-   <widget class="QFrame" name="frame_div_content_2">
+   <widget class="QLabel" name="image_settings">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>60</y>
+      <width>1231</width>
+      <height>91</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-image: url(:/root/icons/settings.jpg);</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLabel" name="image_software">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>430</y>
+      <width>1231</width>
+      <height>91</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-image: url(:/root/icons/dna.png);</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QFrame" name="verticalFrame">
     <property name="geometry">
      <rect>
       <x>0</x>
       <y>520</y>
       <width>1231</width>
-      <height>360</height>
+      <height>421</height>
      </rect>
     </property>
-    <property name="minimumSize">
-     <size>
-      <width>0</width>
-      <height>110</height>
-     </size>
-    </property>
-    <property name="maximumSize">
-     <size>
-      <width>16777215</width>
-      <height>400</height>
-     </size>
-    </property>
     <property name="styleSheet">
-     <string notr="true">background-color: rgb(250,250,250);
-
-</string>
+     <string notr="true">background-color: rgb(250,250,250);</string>
     </property>
-    <property name="frameShape">
-     <enum>QFrame::NoFrame</enum>
-    </property>
-    <property name="frameShadow">
-     <enum>QFrame::Raised</enum>
-    </property>
-    <layout class="QVBoxLayout" name="verticalLayout_8">
-     <property name="spacing">
-      <number>0</number>
-     </property>
-     <property name="leftMargin">
-      <number>0</number>
-     </property>
-     <property name="topMargin">
-      <number>0</number>
-     </property>
-     <property name="rightMargin">
-      <number>0</number>
-     </property>
-     <property name="bottomMargin">
-      <number>0</number>
-     </property>
+    <layout class="QVBoxLayout" name="frame_div_content_2">
      <item>
       <layout class="QGridLayout" name="gridLayout_2">
-       <item row="4" column="1">
+       <item row="7" column="1">
+        <widget class="QComboBox" name="tools"/>
+       </item>
+       <item row="4" column="2">
+        <widget class="QComboBox" name="bin_path"/>
+       </item>
+       <item row="5" column="1">
         <widget class="QLineEdit" name="input_path">
          <property name="inputMask">
           <string/>
@@ -693,24 +696,37 @@ QPushButton:pressed {
          </property>
         </widget>
        </item>
-       <item row="0" column="1">
-        <widget class="QLabel" name="label_14">
+       <item row="5" column="2">
+        <widget class="QLabel" name="label_20">
+         <property name="text">
+          <string>Blast output format: es. (&quot;6 qseqid sseqid slen gaps sseq&quot;)</string>
+         </property>
+        </widget>
+       </item>
+       <item row="6" column="1">
+        <widget class="QLabel" name="label_23">
+         <property name="text">
+          <string>Select the Diamond function</string>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="2">
+        <widget class="QLabel" name="label_13">
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>30</height>
+          </size>
+         </property>
          <property name="styleSheet">
-          <string notr="true">font: 12pt &quot;Arkhip&quot;;</string>
+          <string notr="true"/>
          </property>
          <property name="text">
-          <string>Software settings</string>
+          <string>Binary path (the absolute binary path to use in the HPC filesystem)</string>
          </property>
         </widget>
        </item>
-       <item row="0" column="0">
-        <widget class="QLabel" name="label_10">
-         <property name="text">
-          <string/>
-         </property>
-        </widget>
-       </item>
-       <item row="1" column="1">
+       <item row="2" column="1">
         <widget class="QLabel" name="label_17">
          <property name="styleSheet">
           <string notr="true"/>
@@ -721,65 +737,6 @@ QPushButton:pressed {
         </widget>
        </item>
        <item row="3" column="1">
-        <widget class="QLabel" name="label_12">
-         <property name="styleSheet">
-          <string notr="true"/>
-         </property>
-         <property name="text">
-          <string>Input path (the absolute inputh path to use in the HPC filesystem)</string>
-         </property>
-        </widget>
-       </item>
-       <item row="1" column="2">
-        <widget class="QLabel" name="label_15">
-         <property name="text">
-          <string/>
-         </property>
-        </widget>
-       </item>
-       <item row="1" column="4">
-        <widget class="QLabel" name="label_16">
-         <property name="minimumSize">
-          <size>
-           <width>5</width>
-           <height>0</height>
-          </size>
-         </property>
-         <property name="text">
-          <string/>
-         </property>
-        </widget>
-       </item>
-       <item row="11" column="1">
-        <widget class="QPushButton" name="reset">
-         <property name="minimumSize">
-          <size>
-           <width>50</width>
-           <height>30</height>
-          </size>
-         </property>
-         <property name="styleSheet">
-          <string notr="true">QPushButton {
-	color: white;
-	border: 2px solid rgba(0,45,48,255);
-	border-radius: 5px;	
-	background-color: rgba(0,45,48,255);
-}
-QPushButton:hover {
-	background-color: rgb(4,76,82);
-	border: 2px solid rgb(4,76,82);
-}
-QPushButton:pressed {	
-	background-color: rgb(35, 40, 49);
-	border: 2px solid rgb(43, 50, 61);
-}</string>
-         </property>
-         <property name="text">
-          <string>Reset</string>
-         </property>
-        </widget>
-       </item>
-       <item row="2" column="1">
         <layout class="QHBoxLayout" name="horizontalLayout">
          <item>
           <widget class="QRadioButton" name="diamond">
@@ -797,82 +754,7 @@ QPushButton:pressed {
          </item>
         </layout>
        </item>
-       <item row="11" column="3">
-        <widget class="QPushButton" name="start">
-         <property name="minimumSize">
-          <size>
-           <width>0</width>
-           <height>30</height>
-          </size>
-         </property>
-         <property name="styleSheet">
-          <string notr="true">QPushButton {
-	color: white;
-	border: 2px solid rgba(0,45,48,255);
-	border-radius: 5px;	
-	background-color: rgba(0,45,48,255);
-}
-QPushButton:hover {
-	background-color: rgb(4,76,82);
-	border: 2px solid rgb(4,76,82);
-}
-QPushButton:pressed {	
-	background-color: rgb(35, 40, 49);
-	border: 2px solid rgb(43, 50, 61);
-}</string>
-         </property>
-         <property name="text">
-          <string>Start</string>
-         </property>
-        </widget>
-       </item>
-       <item row="0" column="3">
-        <widget class="QLabel" name="label_18">
-         <property name="styleSheet">
-          <string notr="true"/>
-         </property>
-         <property name="text">
-          <string>Database path (the absolute database path to use in the HPC filesystem)</string>
-         </property>
-        </widget>
-       </item>
-       <item row="1" column="3">
-        <widget class="QComboBox" name="db_path"/>
-       </item>
-       <item row="3" column="3">
-        <widget class="QComboBox" name="bin_path"/>
-       </item>
-       <item row="2" column="3">
-        <widget class="QLabel" name="label_13">
-         <property name="styleSheet">
-          <string notr="true"/>
-         </property>
-         <property name="text">
-          <string>Binary path (the absolute binary path to use in the HPC filesystem)</string>
-         </property>
-        </widget>
-       </item>
-       <item row="6" column="1">
-        <widget class="QLabel" name="label_23">
-         <property name="text">
-          <string>Select the Diamond function</string>
-         </property>
-        </widget>
-       </item>
-       <item row="8" column="1">
-        <widget class="QComboBox" name="tools"/>
-       </item>
-       <item row="6" column="3">
-        <widget class="QLineEdit" name="outfmt">
-         <property name="minimumSize">
-          <size>
-           <width>0</width>
-           <height>30</height>
-          </size>
-         </property>
-        </widget>
-       </item>
-       <item row="10" column="3">
+       <item row="8" column="2">
         <widget class="QCheckBox" name="pa_env">
          <property name="minimumSize">
           <size>
@@ -910,14 +792,14 @@ QPushButton:pressed {
          </property>
         </widget>
        </item>
-       <item row="4" column="3">
-        <widget class="QLabel" name="label_20">
-         <property name="text">
-          <string>Blast output format: es. (&quot;6 qseqid sseqid slen gaps sseq&quot;)</string>
+       <item row="2" column="2">
+        <widget class="QComboBox" name="db_path">
+         <property name="styleSheet">
+          <string notr="true"/>
          </property>
         </widget>
        </item>
-       <item row="8" column="3">
+       <item row="7" column="2">
         <widget class="QLabel" name="anaconda">
          <property name="minimumSize">
           <size>
@@ -933,12 +815,142 @@ QPushButton:pressed {
          </property>
         </widget>
        </item>
-       <item row="12" column="1">
-        <widget class="QLabel" name="label_22">
+       <item row="4" column="1">
+        <widget class="QLabel" name="label_12">
+         <property name="styleSheet">
+          <string notr="true"/>
+         </property>
+         <property name="text">
+          <string>Input path (the absolute inputh path to use in the HPC filesystem)</string>
+         </property>
+        </widget>
+       </item>
+       <item row="6" column="2">
+        <widget class="QLineEdit" name="outfmt">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>30</height>
+          </size>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="2">
+        <widget class="QLabel" name="label_18">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>31</height>
+          </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true"/>
+         </property>
+         <property name="text">
+          <string>Database path (the absolute database path to use in the HPC filesystem)</string>
+         </property>
+        </widget>
+       </item>
+       <item row="9" column="2">
+        <widget class="QPushButton" name="start">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>30</height>
+          </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QPushButton {
+	color: white;
+	border: 2px solid rgba(0,45,48,255);
+	border-radius: 5px;	
+	background-color: rgba(0,45,48,255);
+}
+QPushButton:hover {
+	background-color: rgb(4,76,82);
+	border: 2px solid rgb(4,76,82);
+}
+QPushButton:pressed {	
+	background-color: rgb(35, 40, 49);
+	border: 2px solid rgb(43, 50, 61);
+}</string>
+         </property>
+         <property name="text">
+          <string>Start</string>
+         </property>
+        </widget>
+       </item>
+       <item row="9" column="1">
+        <widget class="QPushButton" name="reset">
+         <property name="minimumSize">
+          <size>
+           <width>50</width>
+           <height>30</height>
+          </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QPushButton {
+	color: white;
+	border: 2px solid rgba(0,45,48,255);
+	border-radius: 5px;	
+	background-color: rgba(0,45,48,255);
+}
+QPushButton:hover {
+	background-color: rgb(4,76,82);
+	border: 2px solid rgb(4,76,82);
+}
+QPushButton:pressed {	
+	background-color: rgb(35, 40, 49);
+	border: 2px solid rgb(43, 50, 61);
+}</string>
+         </property>
+         <property name="text">
+          <string>Reset</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="0">
+        <widget class="QLabel" name="label_10">
+         <property name="text">
+          <string> </string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="3">
+        <widget class="QLabel" name="label_15">
+         <property name="text">
+          <string> </string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="1">
+        <widget class="QLabel" name="label_14">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>30</height>
+          </size>
+         </property>
          <property name="maximumSize">
           <size>
            <width>16777215</width>
-           <height>10</height>
+           <height>40</height>
+          </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">font: 12pt &quot;Arkhip&quot;;</string>
+         </property>
+         <property name="text">
+          <string>Software settings</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="1">
+        <widget class="QLabel" name="label_16">
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>3</height>
           </size>
          </property>
          <property name="text">
@@ -949,38 +961,6 @@ QPushButton:pressed {
       </layout>
      </item>
     </layout>
-   </widget>
-   <widget class="QLabel" name="image_settings">
-    <property name="geometry">
-     <rect>
-      <x>0</x>
-      <y>60</y>
-      <width>1231</width>
-      <height>91</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">background-image: url(:/root/icons/settings.jpg);</string>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-   </widget>
-   <widget class="QLabel" name="image_software">
-    <property name="geometry">
-     <rect>
-      <x>0</x>
-      <y>430</y>
-      <width>1231</width>
-      <height>91</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">background-image: url(:/root/icons/dna.png);</string>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
    </widget>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
