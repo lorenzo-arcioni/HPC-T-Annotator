@@ -1,0 +1,26 @@
+{
+    "accounts": [
+        "ELIX5_castrign"
+    ],
+    "partitions": [
+        "g100_usr_prod",
+        "g100_all_serial"
+    ],
+    "db_paths": [
+        "/g100_scratch/userexternal/tcastrig/BANCHE_OMOLOGY/TR/trembl.dmnd",
+        "/g100_scratch/userexternal/larcioni/DATABASES/swissprot/sp.dmnd",
+        "/cineca/prod/opt/applications/blast+/2.12.0/DB/nr"
+    ],
+    "bin_paths": [
+        "/g100_scratch/userexternal/tcastrig/BANCHE_OMOLOGY/diamond",
+        "/g100_scratch/userexternal/larcioni/BINARIES/diamond/diamond",
+        "/cineca/prod/opt/applications/blast+/2.12.0/binary/blastx"
+    ],
+    "tools": [
+        "blastx",
+        "blastp"
+    ],
+    "outfmt": "\"6 qseqid sseqid slen sscinames stitle sskingdoms\"",
+    "anaconda": "anaconda3",
+    "serial_partition": "g100_all_serial"
+}
