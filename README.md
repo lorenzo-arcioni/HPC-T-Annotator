@@ -147,6 +147,10 @@ The operation of the application, at a high level, can be summarised as follows:
 ## Benchmarks
 Various benchmarks were run on the software, below there is a test performed on the Swiss-Prot database with the sequences of various organisms using Diamond's blastx tool.
 <p align="center"><img src="https://github.com/lorenzo-arcioni/HPC-Annotator/blob/main/Images/Benchmark-SP-table.PNG" alt="Organisms times" style="height:90%; width:90%;"/></p>
+<p align="center"><img src="https://github.com/lorenzo-arcioni/HPC-Annotator/blob/main/Images/Benchmark-SP-graph.PNG" alt="Organisms Times Graph" style="height:90%; width:90%;"/></p>
+
+As we can see from the graph, there is a considerable increase in performance using the HPC-Annotator application compared to using traditional BLAST/Diamond.
+Furthermore, where it is necessary to analyse a large number of sequences and/or against a large database (where serial annotation would be impossible or at any rate very time-consuming), very often the parallel version (with HPC-Annotator) makes annotation possible despite the policies imposed by the Slurm scheduler (such as the limit on the execution time of a job), thus making annotation possible on huge masses of data.
 
 ## License
 
