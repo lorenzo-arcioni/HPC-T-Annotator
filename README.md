@@ -146,7 +146,7 @@ The operation of the application, at a high level, can be summarised as follows:
 
 ## Benchmarks
 Various benchmarks were run on the software, below there is a test performed on the Swiss-Prot database with the sequences of various organisms using Diamond's blastx tool.
-<p align="center"><img src="https://github.com/lorenzo-arcioni/HPC-Annotator/blob/main/Images/Benchmark-SP-table.PNG" alt="Organisms times" style="height:60%; width:60%;"/></p>
+<p align="center"><img src="https://github.com/lorenzo-arcioni/HPC-Annotator/blob/main/Images/Benchmark-SP-table.PNG" alt="Organisms times" style="height:90%; width:90%;"/></p>
 
 ## License
 
