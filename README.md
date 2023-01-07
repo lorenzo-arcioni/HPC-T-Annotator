@@ -145,7 +145,8 @@ The operation of the application, at a high level, can be summarised as follows:
 <p align="center"><img src="https://github.com/lorenzo-arcioni/HPC-Annotator/blob/main/Images/Logic-diagram.png" alt="Logic-diagram" style="height:60%; width:60%;"/></p>
 
 ## Benchmarks
-Various benchmarks were run on the software, below there is a test performed on the Swiss-Prot database with the sequences of various organisms using Diamond's blastx tool.
+Various benchmarks were run on the software using Diamond's blastx tool.
+Below is a table of execution times showing the data of some organisms with standard serial version (1 process) and parallel version. We note that "Actual time" represents the execution time including the scheduling time (which has been reported only for the sake of completeness), so the "Expected Time" figure should be taken as a reference since, on a non-overloaded machine, it is a more reliable reference.
 <p align="center"><img src="https://github.com/lorenzo-arcioni/HPC-Annotator/blob/main/Images/Benchmark-SP-table.PNG" alt="Organisms times" style="height:90%; width:90%;"/></p>
 <p align="center"><img src="https://github.com/lorenzo-arcioni/HPC-Annotator/blob/main/Images/Benchmark-SP-graph.PNG" alt="Organisms Times Graph" style="height:60%; width:60%;"/></p>
 
