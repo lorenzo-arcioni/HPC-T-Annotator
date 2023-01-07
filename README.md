@@ -15,8 +15,8 @@ The software was developed to be used on large clusters with high performance an
 The software does not require installation, but has the following requirements:
 
 -   Python 3.8.15 (or higher)
--   PyQt5
--   PySide2
+-   PyQt5 (In your local machine, only for GUI)
+-   PySide2 (In your local machine, only for GUI)
 -   Anaconda
 -   Slurm
 
@@ -43,7 +43,7 @@ pip install PySide2
 ```
 
 ## Running
-### Options
+### Options for command-line execution
 There are several options available
 ##### Mandatory options
 
@@ -86,7 +86,7 @@ It is mandatory to enter the options all on one line.
 
 ### Script configuration file
 In the programme, in the **Bases** directory, there is also a file that allows the configuration of scripts that will launch BLAST/Diamond processes with customised Slurm settings, such as the estimated execution time, the threads available to the software and the RAM memory dedicated to each job. This file is: 
-- `script_base.txt`
+- `partial_script_base.txt`
 
 ### Command-line example
 A command-line example using the diamond suite.
@@ -111,7 +111,7 @@ Once this is done, you have everything you need to manage and start the computat
 ```sh
 sbatch start.sh
 ```
-At the end of the calculation, the output will be in the tmp directory with the name final_blast.tsv.
+At the end of the calculation, the output will be in the **tmp** directory with the name final_blast.tsv.
 ### Monitoring and error checking
 During the computation, its status can be monitored via the script.
 ```sh
@@ -145,6 +145,8 @@ The operation of the application, at a high level, can be summarised as follows:
 <p align="center"><img src="https://github.com/lorenzo-arcioni/HPC-Annotator/blob/main/Images/Logic-diagram.png" alt="Logic-diagram" style="height:60%; width:60%;"/></p>
 
 ## Benchmarks
+Various benchmarks were run on the software, below there is a test performed on the Swiss-Prot database with the sequences of various organisms using Diamond's blastx tool.
+<p align="center"><img src="https://github.com/lorenzo-arcioni/HPC-Annotator/blob/main/Images/Benchmark-SP-table.PNG" alt="Organisms times" style="height:60%; width:60%;"/></p>
 
 ## License
 
