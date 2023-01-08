@@ -116,7 +116,7 @@ then
 	echo Binary: $binary >> ./general.log
 	echo Database: $database >> ./general.log
 	echo Anaconda module: $anaconda_module >> ./general.log
-	cat ./Bases/script_base.txt >> ./general.log
+	cat ./Bases/partial_script_base.txt >> ./general.log
 	echo Sequences: $sequences >> ./general.log
 fi
 

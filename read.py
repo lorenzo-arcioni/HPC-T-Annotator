@@ -1,6 +1,5 @@
 import sys
 import os
-import fasta
 import shutil
 import subprocess as sp
 
