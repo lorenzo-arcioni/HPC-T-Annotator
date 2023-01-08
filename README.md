@@ -131,11 +131,13 @@ It will not return the estimated end-of-calculation time as it cannot be determi
 
 There is also a useful built-in tool for error checking that tests the input sequences, the partial inputs and outputs file and the final output, in this way we are sure that all input sequences were analysed.
 
-An other useful script allows to check for Slurm errors:
+An other useful script allows to check for Slurm errors, it also allows processes that resulted in an error to be re-executed.
+For example, if you want to change the execution time to all partial scripts and re-execute them, simply give the following commands:
+
 ```sh
+find . -name script.sh -exec sed -i "s/#SBATCH --time=3:00:00/#SBATCH --time=5:00:00/" {} \;
 ./slurm_error_checker.sh
 ```
-It also allows processes that resulted in an error to be re-executed.
 
 ### Log file
 The software generates a log file, **general.log**, that contains all the information about all the computations performed, allowing the user to have a broad overview of how to adjust the waiting time and memory of the individual process. 
@@ -147,12 +149,33 @@ The operation of the application, at a high level, can be summarised as follows:
 ## Benchmarks
 Various benchmarks were run on the software using Diamond's blastx tool.
 Below is a table of execution times showing the data of some organisms with standard serial version (1 process) and parallel version. We note that "Actual time" represents the execution time including the scheduling time (which has been reported only for the sake of completeness), so the "Expected Time" figure should be taken as a reference since, on a non-overloaded machine, it is a more reliable reference.
+
 <p align="center"><img src="https://github.com/lorenzo-arcioni/HPC-Annotator/blob/main/Images/Benchmark-SP-table.PNG" alt="Organisms times" style="height:90%; width:90%;"/></p>
 <p align="center"><img src="https://github.com/lorenzo-arcioni/HPC-Annotator/blob/main/Images/Benchmark-SP-graph.PNG" alt="Organisms Times Graph" style="height:60%; width:60%;"/></p>
 
 As we can see from the graph, there is a considerable increase in performance using the HPC-Annotator application compared to using traditional BLAST/Diamond.
 Furthermore, where it is necessary to analyse a large number of sequences and/or against a large database (where serial annotation would be impossible or at any rate very time-consuming), very often the parallel version (with HPC-Annotator) makes annotation possible despite the policies imposed by the Slurm scheduler (such as the limit on the execution time of a job), thus making annotation possible on huge masses of data.
 
+## Tutorial
+The purpose of this tutorial is to show an example of execution that the user can do with sequences that he finds within this repository, on the Galileo100 machine.
+First, we start by cloning the repository into a folder on our filesystem on the HPC machine
+```sh
+git clone https://github.com/tcastrignan/HPC-Annotator
+```
+After that, you will need execute the following commands, giving execution permissions to all scripts.
+```sh
+cd HPC-Annotator
+chmod 777 *.[sp][hy] && dos2unix *.sh
+```
+So we extract the virtual environment.
+```sh
+tar -zxf pa_env.tar.gz
+```
+And finally we run the **main** script with the following parameters, the computation will be completed in a few seconds.
+```sh
+./main.sh -i ./Tutorial/Bohle_iridovirus/cds_from_genomic.fna -b /g100_scratch/userexternal/tcastrig/BANCHE_OMOLOGY/diamond -t blastx -D -a anaconda3 -d /g100_scratch/userexternal/larcioni/DATABASES/swissprot/sp.dmnd -p 20
+```
+Eventually, we will find the output file of the calculation in the **tmp** directory with the name **final_blast.tsv**.
 ## License
 
 MIT
