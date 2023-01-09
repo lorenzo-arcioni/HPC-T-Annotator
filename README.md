@@ -107,6 +107,7 @@ In order to execute the scripts generated via the graphical interface, this inte
 After entering the data in the configuration panel, the generation procedure must be completed via the general graphic interface.
 <p align="center"><img src="https://github.com/lorenzo-arcioni/HPC-Annotator/blob/main/Images/Main_panel.PNG" alt="Main Panel" style="height:70%; width:70%;"/></p>
 Clicking on **Start** will prompt you to select a directory where a tar archive will be generated and, after that, simply upload the tar file into an (empty) directory of the HPC filesystem, and then execute the following command.
+
 ```sh
 tar -zxf hpc_annotator.tar.gz && chmod 777 *.[sp][hy] && dos2unix *.sh
 ```
