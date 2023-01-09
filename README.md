@@ -103,9 +103,9 @@ An other example using the BLAST
 In this case we have split the computation into 100 jobs using the BLAST suite.
 ### Running the GUI-generated scripts
 In order to execute the scripts generated via the graphical interface, this interface must be started via the Python interpreter, after which all fields in the configuration panel must be filled.
-<p align="center"><img src="https://github.com/lorenzo-arcioni/HPC-Annotator/blob/main/Images/Conf_panel.PNG" alt="Configuration Panel" style="height:80%; width:80%;"/></p>
+<p align="center"><img src="https://github.com/lorenzo-arcioni/HPC-Annotator/blob/main/Images/Conf_panel.PNG" alt="Configuration Panel" style="height:50%; width:50%;"/></p>
 After entering the data in the configuration panel, the generation procedure must be completed via the general graphic interface.
-<p align="center"><img src="https://github.com/lorenzo-arcioni/HPC-Annotator/blob/main/Images/Main_panel.PNG" alt="Main Panel" style="height:60%; width:60%;"/></p>
+<p align="center"><img src="https://github.com/lorenzo-arcioni/HPC-Annotator/blob/main/Images/Main_panel.PNG" alt="Main Panel" style="height:70%; width:70%;"/></p>
 Clicking on **Start** will prompt you to select a directory where a tar archive will be generated and, after that, simply upload the tar file into an (empty) directory of the HPC filesystem, and then execute the following command.
 ```sh
 tar -zxf hpc_annotator.tar.gz && chmod 777 *.[sp][hy] && dos2unix *.sh
