@@ -19,20 +19,23 @@ class SplashWindow(QtWidgets.QMainWindow):
         self.x.input_path.setText("")
 
     #Generate warning dialog
-    def Warning_message(self, text):
-        msg = QtWidgets.QMessageBox(self)
-        msg.setIcon(QtWidgets.QMessageBox.Warning)
-        msg.setText(text)
-        msg.setWindowTitle("Warning")
-        msg.exec_()
+    def Warning_message(self, text, win):
+        win.hide()
+
+        ret = QtWidgets.QMessageBox.warning(self, 'Information', text, QtWidgets.QMessageBox.Ok)
+
+        if ret == QtWidgets.QMessageBox.Ok:
+            win.show()
     
     #Generate information dialog
-    def Info_message(self, text):
-        msg = QtWidgets.QMessageBox(self)
-        msg.setIcon(QtWidgets.QMessageBox.Information)
-        msg.setText(text)
-        msg.setWindowTitle("Success")
-        msg.exec_()
+    def Info_message(self, text, win):
+
+        win.hide()
+
+        ret = QtWidgets.QMessageBox.question(self, 'Information', text, QtWidgets.QMessageBox.Ok)
+
+        if ret == QtWidgets.QMessageBox.Ok:
+            win.show()
 
     #Enter button actions
     def Enter(self):
@@ -51,7 +54,13 @@ class SplashWindow(QtWidgets.QMainWindow):
     
     #Conf button actions
     def Conf(self):
-        #self.close()
+        
+        try:
+            f = open("config.json", 'r')
+            f.close()
+        except Exception:
+            f = open("config.json", "w")
+            f.close()
         self.ConfWindow.setWindowFlags( 
             QtCore.Qt.FramelessWindowHint
         )
@@ -93,14 +102,22 @@ class SplashWindow(QtWidgets.QMainWindow):
         if self.Check_all_settings():
             self.Generate()
         else:
-            self.Warning_message("You must fill all field!")
+            self.Warning_message("You must fill all field!", self.MainWindow)
 
-    #Main windo loading process    
+    #Conf window loading process    
+    def Conf_window_load(self):
+        data = self.Get_data_from_confFile()
+
+        if data != []:
+            return data["accounts"] != [] and data["partitions"] != []
+        return False
+
+    #Main window loading process    
     def Main_window_load(self):
         #Main Window data load
         data = self.Get_data_from_confFile()
 
-        if data["accounts"] != [] and data["partitions"] != []:
+        if data != [] and data["accounts"] != [] and data["partitions"] != []:
             self.x.account.addItems(data["accounts"])
             self.x.partition.addItems(data["partitions"])
             self.x.outfmt.setText(data["outfmt"])
@@ -121,14 +138,18 @@ class SplashWindow(QtWidgets.QMainWindow):
             msg.setIcon(QtWidgets.QMessageBox.Warning)
             msg.setText("Configuration file not found, please run the insertion script first!")
             msg.setWindowTitle("Warning")
-            msg.buttonClicked.connect(self.Exit)
+            msg.buttonClicked.connect(self.MainWindow.close)
             msg.exec_()
 
     #Get all data from config json file
     def Get_data_from_confFile(self):
         if os.path.isfile(os.getcwd() + "/config.json"):
             with open("config.json", "r") as f:
-                return json.load(f)
+                try:
+                    return json.load(f)
+                except Exception as e:
+                    self.MainWindow.close()
+                    return list()
         else: 
             return list()
 
@@ -219,7 +240,7 @@ class SplashWindow(QtWidgets.QMainWindow):
 
             os.chdir(tmp)
 
-            self.Info_message("Scripts correctly generated!")
+            self.Info_message("Scripts correctly generated!", self.MainWindow)
             self.MainWindow.close()
 
     #Insert data in the json config file
@@ -232,7 +253,8 @@ class SplashWindow(QtWidgets.QMainWindow):
                 "outfmt": "",
                 "anaconda": "",
                 "serial_partition": ""}
-                
+        
+          
         with open("config.json", "r") as f:
             try:
                 data = json.loads(f.read())
@@ -240,23 +262,33 @@ class SplashWindow(QtWidgets.QMainWindow):
                 print(str(e))
             f.close()
         
-        if self.y.account.text()     != "" : data["accounts"].append(self.y.account.text())
-        if self.y.ppartition.text()  != "" : data["partitions"].append(self.y.ppartition.text())
-        if self.y.db_path.text()     != "" : data["db_paths"].append(self.y.db_path.text())
-        if self.y.bin_path.text()    != "" : data["bin_paths"].append(self.y.bin_path.text())
-        if self.y.outfmt.text()      != "" : data["outfmt"]    = self.y.outfmt.text()
-        if self.y.anaconda.text()    != "" : data["anaconda"]  = self.y.anaconda.text()
-        if self.y.spartition.text()  != "" : data["serial_partition"]  = self.y.spartition.text()
+        if not self.Conf_window_load() and (self.y.account.text() == "" or self.y.ppartition.text() == ""):
+            self.Warning_message("Warning, insert at least the main data (Account and Partition)", self.ConfWindow)
+            self.ConfWindow.activateWindow()
+            
+        else:
+            if self.y.account.text()     != "" : data["accounts"].append(self.y.account.text())
+            if self.y.ppartition.text()  != "" : data["partitions"].append(self.y.ppartition.text())
+            if self.y.db_path.text()     != "" : data["db_paths"].append(self.y.db_path.text())
+            if self.y.bin_path.text()    != "" : data["bin_paths"].append(self.y.bin_path.text())
+            if self.y.outfmt.text()      != "" : data["outfmt"]    = self.y.outfmt.text()
+            if self.y.anaconda.text()    != "" : data["anaconda"]  = self.y.anaconda.text()
+            if self.y.spartition.text()  != "" : data["serial_partition"]  = self.y.spartition.text()
+            
+            data["accounts"]   = list(set(data["accounts"]))
+            data["partitions"] = list(set(data["partitions"]))
+            data["db_paths"]   = list(set(data["db_paths"]))
+            data["bin_paths"]  = list(set(data["bin_paths"]))
 
-        with open("config.json", "w") as f:
-            json.dump(data, f, indent = 4)
-            f.close()
-        
-        msg = QtWidgets.QMessageBox(self)
-        msg.setText("Data correctly stored!")
-        msg.setWindowTitle("Success")
-        msg.buttonClicked.connect(self.ConfWindow.close)
-        msg.exec_()
+            with open("config.json", "w") as f:
+                json.dump(data, f, indent = 4)
+                f.close()
+            
+            msg = QtWidgets.QMessageBox(self)
+            msg.setText("Data correctly stored!")
+            msg.setWindowTitle("Success")
+            msg.buttonClicked.connect(self.ConfWindow.close)
+            msg.exec_()
 
     #Enable/Disable tools ComboBox
     def En_dis_functions(self):
@@ -326,7 +358,7 @@ Now, in the main panel, we'll have the three databases in a combo_box."""
         self.y.insert.clicked.connect(self.Insert)
         self.y.btn_close.clicked.connect(self.ConfWindow.close)
         self.y.btn_minimize.clicked.connect(self.ConfWindow.showMinimized)
-        self.y.btn_info.clicked.connect(lambda: self.Info_message(infos))
+        self.y.btn_info.clicked.connect(lambda: self.Info_message(infos, self.ConfWindow))
 
 
 if __name__ == '__main__':

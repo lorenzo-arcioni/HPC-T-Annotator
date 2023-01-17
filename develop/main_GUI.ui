@@ -788,7 +788,7 @@ QPushButton:pressed {
 </string>
          </property>
          <property name="text">
-          <string>Include Anaconda Env</string>
+          <string>Include Anaconda Env (If you already have the env on you HPC machine you can ignore this.)</string>
          </property>
         </widget>
        </item>
@@ -912,14 +912,14 @@ QPushButton:pressed {
        <item row="1" column="0">
         <widget class="QLabel" name="label_10">
          <property name="text">
-          <string> </string>
+          <string/>
          </property>
         </widget>
        </item>
        <item row="1" column="3">
         <widget class="QLabel" name="label_15">
          <property name="text">
-          <string> </string>
+          <string/>
          </property>
         </widget>
        </item>

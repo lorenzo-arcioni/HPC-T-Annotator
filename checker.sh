@@ -1,4 +1,4 @@
-#!/bin/bash -l
+#!/bin/bash
 
 x=0 #input file dimension
 y=0 #output file dimension
