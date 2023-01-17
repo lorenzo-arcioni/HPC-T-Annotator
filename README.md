@@ -116,7 +116,7 @@ Once this is done, you have everything you need to manage and start the computat
 ```sh
 sbatch start.sh
 ```
-At the end of the calculation, the output will be in the **tmp** directory with the name final_blast.tsv.
+At the end of the calculation, the output will be in the **tmp** directory with the name **final_blast.tsv**.
 ### Monitoring and error checking
 During the computation, its status can be monitored via the script.
 ```sh
@@ -185,4 +185,4 @@ Eventually, we will find the output file of the calculation in the **tmp** direc
 
 MIT
 
-**Free Software, Hell Yeah!**
+**Free Software, Yeah!**
