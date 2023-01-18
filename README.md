@@ -101,6 +101,28 @@ An other example using the BLAST
 ```
 
 In this case we have split the computation into 100 jobs using the BLAST suite.
+
+## GUI-Interface installation tutorial
+The purpose of this tutorial is to show the user who intends to use the graphical user interface to generate scripts.
+First, we start by cloning the repository into a folder on our filesystem on your local machine.
+```sh
+git clone https://github.com/tcastrignan/HPC-Annotator
+```
+After that, you will need execute the following commands, giving execution permissions to all scripts.
+```sh
+cd HPC-Annotator
+chmod 777 *.[sp][hy] && dos2unix *.sh
+```
+So we extract the virtual environment.
+```sh
+tar -zxf hpc_annotator.tar.gz && chmod 777 *.[sp][hy] && dos2unix *.sh && rm hpc_annotator.tar.gz
+```
+And finally we run the **main.py** script, so the graphical interface will open, allowing you to set the scripts parameters.
+```sh
+python3 main.py
+```
+We click on the configuration button and complete all required steps by filling in all fields of the form. Then we are ready to click on **Enter** and enter the configuration panel; once we have finished entering the parameters, all we have to do is click on **Start** and generate the scripts.
+
 ### Running the GUI-generated scripts
 In order to execute the scripts generated via the graphical interface, this interface must be started via the Python interpreter, after which all fields in the configuration panel must be filled.
 <p align="center"><img src="https://github.com/lorenzo-arcioni/HPC-Annotator/blob/main/Images/Conf_panel.PNG" alt="Configuration Panel" style="height:50%; width:50%;"/></p>
@@ -146,23 +168,9 @@ find . -name script.sh -exec sed -i "s/#SBATCH --time=3:00:00/#SBATCH --time=5:0
 
 ### Log file
 The software generates a log file, **general.log**, that contains all the information about all the computations performed, allowing the user to have a broad overview of how to adjust the waiting time and memory of the individual process. 
-## Algorithm structure
-The operation of the application, at a high level, can be summarised as follows: the master node, after analysing the input file, generates dynamic software according to the characteristics of the input, which will then be executed by the slaves nodes. Once the slaves are started, a further software will manage the control of the entire application; taking care of intervening when all the nodes have completed their computation and merging all the partial results obtained, as well as carrying out tests that, if passed, guarantee the correctness of the calculation. The control software will carry out statistics on the time taken by each node (actual and real) and on the general calculation time.
 
-<p align="center"><img src="https://github.com/lorenzo-arcioni/HPC-Annotator/blob/main/Images/Logic-diagram.png" alt="Logic-diagram" style="height:60%; width:60%;"/></p>
-
-## Benchmarks
-Various benchmarks were run on the software using Diamond's blastx tool.
-Below is a table of execution times showing the data of some organisms with standard serial version (1 process) and parallel version. We note that "Actual time" represents the execution time including the scheduling time (which has been reported only for the sake of completeness), so the "Expected Time" figure should be taken as a reference since, on a non-overloaded machine, it is a more reliable reference.
-
-<p align="center"><img src="https://github.com/lorenzo-arcioni/HPC-Annotator/blob/main/Images/Benchmark-SP-table.PNG" alt="Organisms times" style="height:90%; width:90%;"/></p>
-<p align="center"><img src="https://github.com/lorenzo-arcioni/HPC-Annotator/blob/main/Images/Benchmark-SP-graph.PNG" alt="Organisms Times Graph" style="height:60%; width:60%;"/></p>
-
-As we can see from the graph, there is a considerable increase in performance using the HPC-Annotator application compared to using traditional BLAST/Diamond.
-Furthermore, where it is necessary to analyse a large number of sequences and/or against a large database (where serial annotation would be impossible or at any rate very time-consuming), very often the parallel version (with HPC-Annotator) makes annotation possible despite the policies imposed by the Slurm scheduler (such as the limit on the execution time of a job), thus making annotation possible on huge masses of data.
-
-## Tutorial
-The purpose of this tutorial is to show an example of execution that the user can do with sequences that he finds within this repository, on the Galileo100 machine.
+## Tutorial command-line
+The purpose of this tutorial is to show an example of execution that the user can do with sequences that he finds within this repository, on the Galileo100 machine, using the command-line tool.
 First, we start by cloning the repository into a folder on our filesystem on the HPC machine
 ```sh
 git clone https://github.com/tcastrignan/HPC-Annotator
@@ -181,8 +189,22 @@ And finally we run the **main** script with the following parameters, the comput
 ./main.sh -i ./Tutorial/Bohle_iridovirus/cds_from_genomic.fna -b /g100_scratch/userexternal/tcastrig/BANCHE_OMOLOGY/diamond -t blastx -D -a anaconda3 -d /g100_scratch/userexternal/larcioni/DATABASES/swissprot/sp.dmnd -p 20
 ```
 Eventually, we will find the output file of the calculation in the **tmp** directory with the name **final_blast.tsv**.
-## License
 
-MIT
+## Algorithm structure
+The operation of the application, at a high level, can be summarised as follows: the master node, after analysing the input file, generates dynamic software according to the characteristics of the input, which will then be executed by the slaves nodes. Once the slaves are started, a further software will manage the control of the entire application; taking care of intervening when all the nodes have completed their computation and merging all the partial results obtained, as well as carrying out tests that, if passed, guarantee the correctness of the calculation. The control software will carry out statistics on the time taken by each node (actual and real) and on the general calculation time.
+
+<p align="center"><img src="https://github.com/lorenzo-arcioni/HPC-Annotator/blob/main/Images/Logic-diagram.png" alt="Logic-diagram" style="height:60%; width:60%;"/></p>
+
+## Benchmarks
+Various benchmarks were run on the software using Diamond's blastx tool.
+Below is a table of execution times showing the data of some organisms with standard serial version (1 process) and parallel version. We note that "Actual time" represents the execution time including the scheduling time (which has been reported only for the sake of completeness), so the "Expected Time" figure should be taken as a reference since, on a non-overloaded machine, it is a more reliable reference.
+
+<p align="center"><img src="https://github.com/lorenzo-arcioni/HPC-Annotator/blob/main/Images/Benchmark-SP-table.PNG" alt="Organisms times" style="height:90%; width:90%;"/></p>
+<p align="center"><img src="https://github.com/lorenzo-arcioni/HPC-Annotator/blob/main/Images/Benchmark-SP-graph.PNG" alt="Organisms Times Graph" style="height:60%; width:60%;"/></p>
+
+As we can see from the graph, there is a considerable increase in performance using the HPC-Annotator application compared to using traditional BLAST/Diamond.
+Furthermore, where it is necessary to analyse a large number of sequences and/or against a large database (where serial annotation would be impossible or at any rate very time-consuming), very often the parallel version (with HPC-Annotator) makes annotation possible despite the policies imposed by the Slurm scheduler (such as the limit on the execution time of a job), thus making annotation possible on huge masses of data.
+
+## License
 
 **Free Software, Yeah!**
