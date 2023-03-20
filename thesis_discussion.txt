@@ -3,11 +3,12 @@ Buon pomeriggio a tutti, sono lieto di presentare oggi la mia tesi di laurea, ch
 in particolare si concentra sullo sviluppo del software HPC-Annotator che esegue l'annotazione per 
 omologia dei trascrittomi in maniera parallela.
 I risultati della mia ricerca hanno dimostrato che è possibile incrementare notevolmente le 
-prestazioni dei software di annotazione attuali. Questo lavoro fornisce importanti strumenti utili 
+prestazioni dei software di annotazione attuali. Questo lavoro fornisce strumenti utili 
 a biologi, bioinformatici e in generale ai ricercatori nell'area biomedica, strumenti che sono in grado
 di velocizzare e se semplificare notevolmente i proceessi di analisi dei dati biologici. 
 Inoltre, la mia tesi apre la strada per ulteriori ricerche in questo campo, e offre spunti per ulteriori applicazioni pratiche.
 
 ### Contesto
+Nelle prime slide descriverò il contesto biologico nel quale è inserito il software
 
 
