@@ -40,6 +40,12 @@ def main():
 		if os.path.exists(pwd): # If tmp already exists delete all file inside it
 			shutil.rmtree("tmp")
 		os.mkdir("tmp")
+
+		with open(pwd+"/final_blast.tsv", "w") as f:
+			outfmt_list = outformat[:-1].split(" ")
+			f.write("\t".join(outfmt_list[1:]))
+			f.write("\n")
+			f.close()
 			
 	else:
 		chunks = None

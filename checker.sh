@@ -37,6 +37,6 @@ if [ $y -eq $(wc -c < ./tmp/final_blast.tsv) ]
 		echo OK $y
 	else
 		echo Wrong
-		echo Given $y ... expected $(wc -c < ./tmp/final_blats.tsv)
+		echo Given $y ... expected $(wc -c < ./tmp/final_blast.tsv)
 fi
 

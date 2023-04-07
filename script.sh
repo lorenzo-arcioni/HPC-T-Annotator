@@ -45,9 +45,10 @@ python3 time_calculator.py >> ./general.log
 date1=$(grep "Starting timestamp#" -i ./general.log | tail -1 | cut -d"#" -f 2)
 date2=$(date +'%Y-%m-%d %H:%M:%S')
 echo "Ending timestamp#"$date2 >> ./general.log
-secs=$(($(date -d "$date2" +'%s') - $(date -d "$date1" +'%s')))
-echo "Total elapsed time: "$(printf '%dd:%dh:%dm:%ds\n' $((secs/86400)) $((secs%86400/3600)) $((secs%3600/60))   $((secs%60))) >> ./general.log
-./checker.sh input/input.fa > ./errors.log
+diff=$(($(date -d "$date2" +'%s') - $(date -d "$date1" +'%s')))
+echo "Total elapsed time: "$(date -d @$diff -u +%H:%M:%S) >> ./general.log
+#./checker.sh input/input.fa > ./errors.log
+date -u -d @$(($(date -d "$date2" '+%s') - $(date -d "$date1" '+%s'))) '+%T'
 echo '-------------------------------------------------' >> ./general.log
 #mail -s 'Computazione ultimata' lorenzo.arcioni2000@gmail.com <<< $(tail -8 ./general.log)$'\n'$(cat errors.log)
 
