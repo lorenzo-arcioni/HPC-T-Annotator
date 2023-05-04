@@ -57,7 +57,10 @@ For example in the diamond additional options file we can insert:
 ```
 It is **mandatory** to enter the options all on one line.
 
-### Command-line example
+## Execution pipeline example
+After cloning the repository and extracting the TAR archive, you can proceed as follows: perform the code generation phase, upload (if necessary) the generated TAR package to the HPC machine, and then start the computation.
+### Generation of code
+#### Command-line generation
 A command-line example using the diamond suite.
 ```sh
 ./main.sh -i /home/user/assembly/slow_fast_degs_hs.fasta -b /home/user/BANCHE_OMOLOGY/diamond -T blastx -t 48 -D -d /home/user/BANCHE_OMOLOGY/NR/nr.dmnd -p 50
@@ -68,6 +71,27 @@ An other example using the BLAST
 ```sh
 ./main.sh -i ../project/assembly/slow_fast_degs_hs.fasta -b /home/blast/blastx -T blastx -t 48 -d /home/user/DB/nr -p 100
 ```
+
+In this case we have split the computation into 100 jobs using the BLAST suite.
+
+#### Interface generation
+
+### Execution on HPC machine
+So we extract the generated code.
+```sh
+tar -zxf hpc_annotator.tar && rm hpc_annotator.tar
+```
+Once this is done, you have everything you need to manage and start the computation, so all you have to do is run (if you are on Slurm):
+
+```sh
+sbatch start.sh
+```
+Or (if you are on HTCondor):
+```sh
+condor_submit start.sh
+```
+
+At the end of the calculation, the output will be in the **tmp** directory with the name **final_blast.tsv**.
 
 ## License
 
