@@ -1,0 +1,37 @@
+#Meanwhile there are still process running
+
+start_time=$(date +%s)
+
+while [ $(ls -l ./tmp | grep '^d' | wc -l) != $(ls -l ./tmp/*/finish_flag 2>/dev/null | wc -l) ]
+do
+	end_time=$(date +%s)
+	
+	#If my running time > 3 hours
+	if [ $(( end_time - start_time )) -gt 10800 ]
+		then
+			#Launch my clone
+			{} ./controlscript.sh
+			exit 0
+	fi
+	sleep 5
+done
+
+#For each directory (process)
+for d in ./tmp/*/ ; 
+	do
+		#Append partial output to the main output
+		cat ${{d}}blast.out >> ./tmp/final_blast.tsv
+	done
+
+#Calculate time
+python3 time_calculator.py >> ./general.log  
+
+#Update log files
+date1=$(grep "Starting timestamp#" -i ./general.log | tail -1 | cut -d"#" -f 2)
+date2=$(date +'%Y-%m-%d %H:%M:%S')
+echo "Ending timestamp#"$date2 >> ./general.log
+diff=$(($(date -d "$date2" +'%s') - $(date -d "$date1" +'%s')))
+echo "Total elapsed time: "$(date -d @$diff -u +%H:%M:%S) >> ./general.log
+#./checker.sh input/input.fa > ./errors.log
+date -u -d @$(($(date -d "$date2" '+%s') - $(date -d "$date1" '+%s'))) '+%T'
+echo '-------------------------------------------------' >> ./general.log

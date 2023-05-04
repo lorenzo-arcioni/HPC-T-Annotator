@@ -1,25 +1,11 @@
-#!/bin/bash -l
-#SBATCH --job-name=PA_proc-start
-#SBATCH --nodes=1
-#SBATCH --ntasks=1
-#SBATCH --mem=25GB
-#SBATCH --time=02:00:00
-#SBATCH --output=general.out
-#SBATCH --error=general.err
-#SBATCH --account={}
-#SBATCH -p {}
-
-#Loading modules
-module purge
-module load {}
-
-#Decompressing virtual env
-tar -xzf pa_env.tar.gz
-
-#source $HOME/.bashrc
-source activate ./PA_env
-
 inputfile="{}"
+processes={}
+threads={}
+outformat={}
+diamond={}
+tool="{}"
+binary="{}"
+database="{}"
 #########################
 #Create input folder with input file inside
 #Translate the inputfile
@@ -31,18 +17,16 @@ inputfile=./input/input.fa
 dos2unix "$inputfile"
 grep ">" -i "$inputfile" > headers.txt
 #########################
-processes={}
+
 #Updating log file
 echo "Starting timestamp#""$(date +'%Y-%m-%d %H:%M:%S')" >> ./general.log
-echo Input file: {} >> ./general.log
+echo Input file: $inputfile >> ./general.log
 echo Processes: $processes >> ./general.log
-echo Out-format: {} >> ./general.log
-[ {} -eq 1 ] && echo "Diamond: yes" >> ./general.log || echo "Diamond: no" >> ./general.log
-echo Tool: {} >> ./general.log
-echo Binary: {} >> ./general.log
-echo Database: {} >> ./general.log
-echo Anaconda module: {} >> ./general.log
-cat ./Bases/partial_script_base.txt >> ./general.log
+echo Out-format: $outformat >> ./general.log
+[ $diamond -eq 1 ] && echo "Diamond: yes" >> ./general.log || echo "Diamond: no" >> ./general.log
+echo Tool: $tool >> ./general.log
+echo Binary: $binary >> ./general.log
+echo Database: $database >> ./general.log
 echo Sequences: $(grep ">" -i headers.txt -c) >> ./general.log
 #Run the processes
-/usr/bin/time -f "%E" mpiexec -n "$processes" python3 read.py
+/usr/bin/time -f "%E" python3 read.py

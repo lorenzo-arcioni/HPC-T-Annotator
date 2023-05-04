@@ -1,0 +1,8 @@
+#SBATCH --nodes=1
+#SBATCH --ntasks-per-node=1
+#SBATCH --mem=20GB
+#SBATCH --time=01:00:00
+#SBATCH --output=general.out
+#SBATCH --error=general.err
+#SBATCH --account=ELIX5_Mattiucci
+#SBATCH -p g100_usr_prod

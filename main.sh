@@ -2,13 +2,17 @@
 #Main script
 
 #Use it to automate the running of the start.sh
-usage="$(basename "$0") -i inputfile [-h] [-p number_of_processes] [-f blastx_out_fotmat] [-d database path] [-a anaconda slurm module name] [-D] [-t used tools] [-b binary of executable] -- parallel annotation application with Blast/Diamond tool"
+usage="$(basename "$0") -i inputfile [-h] [-p number_of_processes] \
+[-f blastx_out_fotmat] [-d database path] [-D] [--slurm] [--htcondor]\
+[-T used tools] [-b binary of executable] [-t threads]\
+-- parallel annotation application with Blast/Diamond tool"
 
 outfmt="\"6 qseqid sseqid slen qstart qend length mismatch gapopen gaps sseq\""
 
 diamond=0
+wlm='none'
 
-while getopts ':i:hDp:f:b:t:d:a:' option;
+while getopts ':i:hDp:f:b:t:T:d:-:' option;
 do
     case "${option}" in
         h) echo $usage
@@ -17,22 +21,47 @@ do
         f) outfmt="\"${OPTARG}\"";;
         D) diamond=1;;
         p) processes=$OPTARG;;
+		t) threads=$OPTARG;;
         b) binary=$OPTARG;;
-        t) tool=$OPTARG;;
+        T) tool=$OPTARG;;
         d) database=$OPTARG;;
-        a) anaconda_module=$OPTARG;;
+
+		-)
+			case "${OPTARG}" in
+				slurm)
+				wlm='slurm'
+				;;
+				htcondor)
+				wlm='htcondor'
+				;;
+				* )
+				echo printf "illegal option: -%s\n" "$OPTARG" >&2
+					echo "$usage" >&2
+					exit 1
+				;;
+			esac
+			;;
+
         :) printf "missing argument for -%s\n" "$OPTARG" >&2
-	   echo "$usage" >&2
-	   exit 1;;
-	?) printf "illegal option: -%s\n" "$OPTARG" >&2
+			echo "$usage" >&2
+	   		exit 1;;
+		?) printf "illegal option: -%s\n" "$OPTARG" >&2
             echo "$usage" >&2
             exit 1;;
+		
     esac
 done
 
 if [ -z "$inputfile" ]
 then
 	echo "Insert an input file" >&2
+	echo $usage
+	exit 2
+fi
+
+if [ -z "$threads" ]
+then
+	echo "Insert the number of threads" >&2
 	echo $usage
 	exit 2
 fi
@@ -46,21 +75,21 @@ fi
 
 if [ -z "$tool" ] && [ $diamond == 1 ]
 then
-	echo "Insert the tool" >&2
+	echo "Insert the tool (blastx or blastp)" >&2
 	echo $usage
 	exit 2
 fi
 
 if [ -z "$database" ]
 then
-	echo "Insert the database" >&2
+	echo "Insert the database path" >&2
 	echo $usage
 	exit 2
 fi
 
 if [ "$tool" != "blastx" -a "$tool" != "blastp" ]
 then
-	echo "Only blastx and blastp are supported in this version, please insert one of this tools" >&2
+	echo "Only blastx and blastp are supported in this version, please insert one of this tools." >&2
 	echo $usage
 	exit 2
 fi
@@ -69,7 +98,9 @@ fi
 sequences=$(grep ">" -i "$inputfile" -c)
 if [ -z "$processes" ]
 then
-	processes=$sequences
+	echo "Insert the number of processes (must be less or equal to the number of sequences in the input file)" >&2
+	echo $usage
+	exit 2
 fi
 
 if [ $processes -gt $sequences ]
@@ -78,46 +109,66 @@ then
 	exit 3
 fi
 
-if [ -z "$anaconda_module" ]
-then
-	anaconda_module="anaconda3"
-fi
-
 echo "Current settings"
 echo
 echo Total processes: $processes
 echo Sequences: $sequences
-echo input file: $inputfile
-echo output format: $outfmt
-echo tool: $tool
-echo database: $database
-echo binary path: $binary
-echo anaconda module: $anaconda_module
+echo Input file: $inputfile
+echo Output format: $outfmt
+echo Tool: $tool
+echo Threads: $threads
+echo Database: $database
+echo Binary path: $binary
+echo Workload manager: $wlm
+
 if [ $diamond == 1 ]
 then
 	echo "Blast with Diamond"
 fi
+
 echo
 echo "Continue? (y/n)"
 read choice
 
 if [ "$choice" = "y" ]
 then
-	#export processes=$processes inputfile=$inputfile outfmt="$outfmt" diamond=$diamond binary=$binary database=$database anaconda_module=$anaconda_module tool=$tool && ./start.sh	
-	sbatch --export=ALL,processes=$processes,inputfile=$inputfile,outfmt="$outfmt",diamond=$diamond,tool=$tool,binary=$binary,database=$database,anaconda_module=$anaconda_module start.sh
-	
-	#Updating log file
-	echo "Starting timestamp#""$(date +'%Y-%m-%d %H:%M:%S')" >> ./general.log
-	echo Input file: $inputfile >> ./general.log
-	echo Processes: $processes >> ./general.log
-	echo Out-format: $outfmt >> ./general.log
-	[ $diamond -eq 1 ] && echo "Diamond: yes" >> ./general.log || echo "Diamond: no" >> ./general.log
-	echo Tool: $tool >> ./general.log
-	echo Binary: $binary >> ./general.log
-	echo Database: $database >> ./general.log
-	echo Anaconda module: $anaconda_module >> ./general.log
-	cat ./Bases/partial_script_base.txt >> ./general.log
-	echo Sequences: $sequences >> ./general.log
+	python3  creator.py -p $processes -i "$inputfile" -f "$outfmt" -T $tool -t $threads -d "$database" -b "$binary" -w "$wlm" -D $diamond
+
+	echo "All codes are correctly generated!"
+	echo "Do you want to: (enter the number choice and press ENTER)"
+	echo "1) Exec your code rigth now (on this machine)"
+	echo "2) Generate tar file to upload on a remote machine"
+	echo "3) Exit"
+	read choice
+
+	if [ "$choice" = "1" ]; then
+			case "$wlm" in
+				slurm)
+				sbatch --export=ALL,processes=$processes,threads=$threads,inputfile=$inputfile,outfmt="$outfmt",diamond=$diamond,tool=$tool,binary=$binary,database=$database start.sh
+				;;
+				htcondor)
+				echo "Work in progress!!"
+				;;
+				none)
+				export processes=$processes threads=$threads inputfile=$inputfile outfmt="$outfmt" diamond=$diamond binary=$binary database=$database tool=$tool && ./start.sh
+				;;
+			esac
+	else if [ "$choice" = "2" ]; then
+		case "$wlm" in
+			slurm)
+			tar -cf hpc_annotator.tar read.py start.sh time_calculator.py cancel.sh checker.sh control_script.sh monitor.sh slurm_error_checker.sh
+			;;
+			htcondor)
+			echo "Work in progress!!"
+			;;
+			none)
+			tar -cf hpc_annotator.tar read.py start.sh time_calculator.py control_script.sh
+			;;
+		esac 
+		rm  read.py start.sh control_script.sh
+
+		fi
+		
+	fi
+
 fi
-
-
