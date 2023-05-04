@@ -1,7 +1,0 @@
-Inserire un check su eventuali errori di nodo (es. job cancellato due to time limit)
-
-Inserire una parallelizzazione di secondo livello per ovviare al limite temporale: ulteriore parallelizazione nel processo
-
-creo un ambiente virtuale anaconda in modo da portare tutte le librerie python utili all'interno dell'applicazione
-
-Inserire nella tesi i moduli necessari (anaconda per mpi4py, )
