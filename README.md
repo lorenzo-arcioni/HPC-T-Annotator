@@ -2,14 +2,11 @@
 ## Introduction
 
 HPC Annotator is a parallelization tool that increases the performance of BLAST and Diamond annotation software. 
-The key features are:
-
--   Splits the Multi-FASTA input file into more partials Multi-FASTAs.
--   Run simultaneously BLAST/Diamond sequence aligner for protein and translated DNA searches on HPC machine on partials inputs.
--   Gather and merge all partials outputs from the BLAST/Diamond and give the final result.
--   Provide a GUI that allows to generate dynamic scripts for the computation.
 
 The software was developed to be used on large clusters with high performance and not overloaded. If the cluster where it runs is overloaded and the jobs fail to start simultaneously, there will be a considerable degradation in performance.
+
+Visit the  <a href="https://github.com/lorenzo-arcioni/HPC-Annotator/wiki">Wiki</a> page for futher informations!
+
 ## Installation
 ### Prerequisites
 
