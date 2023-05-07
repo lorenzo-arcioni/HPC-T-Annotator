@@ -57,7 +57,7 @@ def main():
 		with open("script.sh", 'w', encoding='utf-8') as script:
 			script.write("#!/bin/bash" + '\n')
 
-			script.write("{}")
+			script.write("{}") # Workload manager header
 
 			if wlm == "slurm":
 				script.write("#SBATCH --cpus-per-task=" + str(threads) + '\n')
