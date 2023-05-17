@@ -96,4 +96,4 @@ At the end of the calculation, the output will be in the **tmp** directory with 
 
 ## License
 
-**Free Software, Yeah!**
+**MIT**
