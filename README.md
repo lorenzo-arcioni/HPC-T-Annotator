@@ -1,3 +1,7 @@
+![Build passing](https://img.shields.io/badge/build-passing-success)
+![License MIT](https://img.shields.io/badge/license-MIT-success)
+![Release Latest](https://img.shields.io/badge/release-latest-blue)
+
 # HPC-Annotator
 ## Introduction
 
