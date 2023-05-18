@@ -80,7 +80,7 @@ In this case we have split the computation into 100 jobs using the BLAST suite.
 ### Execution on HPC machine
 So we extract the generated code.
 ```sh
-tar -zxf hpc_annotator.tar && rm hpc_annotator.tar
+tar -xf hpc_annotator.tar && rm hpc_annotator.tar
 ```
 Once this is done, you have everything you need to manage and start the computation, so all you have to do is run (if you are on Slurm):
 
