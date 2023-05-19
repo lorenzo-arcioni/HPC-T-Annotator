@@ -10,7 +10,7 @@ do
 	if [ $(( end_time - start_time )) -gt 10800 ]
 		then
 			#Launch my clone
-			{} ./controlscript.sh
+			{} ./control_script.sh
 			exit 0
 	fi
 	sleep 5
@@ -35,3 +35,4 @@ echo "Total elapsed time: "$(date -d @$diff -u +%H:%M:%S) >> ./general.log
 #./checker.sh input/input.fa > ./errors.log
 date -u -d @$(($(date -d "$date2" '+%s') - $(date -d "$date1" '+%s'))) '+%T'
 echo '-------------------------------------------------' >> ./general.log
+

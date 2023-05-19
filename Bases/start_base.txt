@@ -30,3 +30,4 @@ echo Database: $database >> ./general.log
 echo Sequences: $(grep ">" -i headers.txt -c) >> ./general.log
 #Run the processes
 /usr/bin/time -f "%E" python3 read.py
+
