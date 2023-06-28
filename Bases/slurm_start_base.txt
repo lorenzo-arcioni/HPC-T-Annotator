@@ -2,7 +2,7 @@
 #SBATCH --nodes=1
 #SBATCH --ntasks=1
 #SBATCH --mem=20GB
-#SBATCH --time=02:00:00
+#SBATCH --time=03:00:00
 #SBATCH --output=general.out
 #SBATCH --error=general.err
-
+#SBATCH --partition=g100_all_serial

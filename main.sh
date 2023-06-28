@@ -21,7 +21,7 @@ do
         f) outfmt="\"${OPTARG}\"";;
         D) diamond=1;;
         p) processes=$OPTARG;;
-	t) threads=$OPTARG;;
+		t) threads=$OPTARG;;
         b) binary=$OPTARG;;
         T) tool=$OPTARG;;
         d) database=$OPTARG;;

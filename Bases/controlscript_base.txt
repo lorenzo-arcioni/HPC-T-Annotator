@@ -6,8 +6,8 @@ while [ $(ls -l ./tmp | grep '^d' | wc -l) != $(ls -l ./tmp/*/finish_flag 2>/dev
 do
 	end_time=$(date +%s)
 	
-	#If my running time > 3 hours
-	if [ $(( end_time - start_time )) -gt 10800 ]
+	#If my running time > 1 hours
+	if [ $(( end_time - start_time )) -gt 3600 ]
 		then
 			#Launch my clone
 			{} ./control_script.sh
@@ -35,4 +35,3 @@ echo "Total elapsed time: "$(date -d @$diff -u +%H:%M:%S) >> ./general.log
 #./checker.sh input/input.fa > ./errors.log
 date -u -d @$(($(date -d "$date2" '+%s') - $(date -d "$date1" '+%s'))) '+%T'
 echo '-------------------------------------------------' >> ./general.log
-

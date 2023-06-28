@@ -8,7 +8,7 @@ from datetime import datetime
 def main():
 
 	outformat  = {}
-	inputfile  = "./input/input.fa"
+	inputfile  = "../../input/input.fa"
 	diamond    =  {}
 	binary     = "{}"
 	database   = "{}"
@@ -63,7 +63,7 @@ def main():
 				script.write("#SBATCH --cpus-per-task=" + str(threads) + '\n')
 				script.write("#SBATCH --job-name=PA_proc-" + str(p) + '\n')
 
-			script.write("awk -f ./creator.awk " + "../../input/input.fa" + " > contigs.fa\n")
+			script.write("awk -f ./creator.awk " + inputfile + " > contigs.fa\n")
 
 			if diamond:
 				script.write("/usr/bin/time -f \"%e\" " + binary + " " + tool + " -q contigs.fa -d " + database + " -o blast.out" + 
@@ -96,8 +96,6 @@ def main():
 		pass
 	else:
 		sp.call("bash ./control_script.sh", shell=True)
-		pass
 	
 if __name__ == '__main__':
     sys.exit(main())
-    

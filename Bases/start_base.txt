@@ -13,7 +13,7 @@ database="{}"
 #########################
 rm -rf ./input; mkdir input
 cp "$inputfile" ./input/input.fa
-inputfile=./input/input.fa
+inputfile="./input/input.fa"
 dos2unix "$inputfile"
 grep ">" -i "$inputfile" > headers.txt
 #########################
@@ -29,5 +29,5 @@ echo Binary: $binary >> ./general.log
 echo Database: $database >> ./general.log
 echo Sequences: $(grep ">" -i headers.txt -c) >> ./general.log
 #Run the processes
-/usr/bin/time -f "%E" python3 read.py
 
+/usr/bin/time -f "%E" python3 read.py

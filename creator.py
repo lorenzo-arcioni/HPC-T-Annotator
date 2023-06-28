@@ -1,5 +1,7 @@
 import sys
 import os
+import random
+import string
 from optparse import OptionParser
 import subprocess as sp
 
@@ -12,6 +14,7 @@ tool       = None
 wlm        = None
 processes  = 1
 threads    = 1
+random_dir = 0
 
 #Initialize all options and give a velue for all global variables
 def init():
@@ -26,6 +29,7 @@ def init():
 	global binary
 	global database
 	global wlm
+	global random_dir
 
 	#Defining the options
 	parser = OptionParser()
@@ -37,8 +41,9 @@ def init():
 	parser.add_option("-b", "--binary",    dest="binary")
 	parser.add_option("-T", "--tool",      dest="tool")
 	parser.add_option("-d", "--database",  dest="db")
-	parser.add_option("-w", "--wlm",  dest="wlm")
+	parser.add_option("-w", "--wlm",       dest="wlm")
 	parser.add_option("-t", "--threads",   dest="threads")
+	parser.add_option("-R", "--random",    dest="random_dir")
 
 
 	(options, args) = parser.parse_args()
@@ -53,7 +58,7 @@ def init():
 		outformat = options.outformat
 
 	if options.diamond != None:
-		diamond = options.diamond
+		diamond = 1
 
 	if options.binary != None:
 		binary = options.binary
@@ -72,16 +77,14 @@ def init():
 
 	if options.processes != None:
 		processes = options.processes
+	
+	if options.random_dir != None:
+		random_dir = 1
 
-def fill_startbase():
-	global processes
-	global threads
-	global inputfile
-	global outformat
-	global diamond
-	global tool
-	global binary
-	global database
+def fill_startbase(processes, threads, inputfile, outformat, diamond, tool, binary, database, wlm):
+
+	if random_dir:
+		os.chdir()
 
 	with open("./start.sh", "w") as start:
 
@@ -104,26 +107,21 @@ def fill_startbase():
 			start.write('\n' + base)
 			f.close()
 
-	start.close()
+		start.close()
+	if random_dir:
+		os.chdir("../")
 
-def fill_readbase():
-	global processes
-	global threads
-	global inputfile
-	global outformat
-	global diamond
-	global tool
-	global binary
-	global database
+
+def fill_readbase(processes, threads, outformat, diamond, tool, binary, database, wlm):
 
 	with open("./read.py", "w") as read:
 
 		with open("./Bases/blast_additional_options.txt", "r") as f:
-			bao = f.read().replace("\n", "")
+			bao = f.read().replace("\n", " ")
 			f.close()
 		
 		with open("./Bases/diamond_additional_options.txt", "r") as f:
-			dao = f.read().replace("\n", "")
+			dao = f.read().replace("\n", " ")
 			f.close()
 		
 		if wlm == 'slurm':
@@ -144,16 +142,7 @@ def fill_readbase():
 
 		read.close()
 
-def fill_controlscriptbase():
-	global processes
-	global threads
-	global inputfile
-	global outformat
-	global diamond
-	global tool
-	global binary
-	global database
-	global wlm
+def fill_controlscriptbase(wlm):
 
 	with open("./control_script.sh", "w") as control:
 
@@ -181,8 +170,7 @@ def fill_controlscriptbase():
 
 		control.close()
 
-def fill_monitor():
-	global wlm
+def fill_monitor(wlm):
 
 	with open("monitor.sh", "w") as monitor:
 
@@ -203,8 +191,7 @@ def fill_monitor():
 
 
 
-def fill_cancel():
-	global wlm
+def fill_cancel(wlm):
 
 	with open("cancel.sh", "w") as cancel:
 
@@ -221,8 +208,6 @@ def fill_cancel():
 		
 		cancel.close()
 	
-	print(wlm)
-
 	if wlm == "none":
 
 		os.remove("cancel.sh")
@@ -238,16 +223,27 @@ def main():
 	global binary
 	global database
 	global wlm
+	global random_dir
 
-	fill_startbase()
-	fill_readbase()
-	fill_controlscriptbase()
-	fill_monitor()
-	fill_cancel()
+	tmp_dir = "./"
+
+	if random_dir:
+		tmp_dir = 'tmp_' + ''.join(random.choices(string.ascii_lowercase, k=10))
+		os.mkdir(tmp_dir)
+		os.chdir(tmp_dir)
+
+	fill_startbase(processes, threads, inputfile, outformat, diamond, tool, binary, database, wlm)
+	fill_readbase(processes, threads, outformat, diamond, tool, binary, database, wlm)
+	fill_controlscriptbase(wlm)
+	fill_monitor(wlm)
+	fill_cancel(wlm)
 
 	sp.call("chmod 777 start.sh", shell=True)
 	sp.call("chmod 777 control_script.sh", shell=True)
 	sp.call("chmod 777 read.py", shell=True)
+
+	if random_dir:
+		os.chdir("../")
 
 if __name__ == '__main__':
     init()
