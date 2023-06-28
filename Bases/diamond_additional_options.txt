@@ -1,1 +1,1 @@
---ultra-sensitive --quiet
+-k 1 --fast --quiet

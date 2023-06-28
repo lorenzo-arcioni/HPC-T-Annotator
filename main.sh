@@ -132,7 +132,7 @@ read choice
 
 if [ "$choice" = "y" ]
 then
-	python3  creator.py -p $processes -i "$inputfile" -f "$outfmt" -T $tool -t $threads -d "$database" -b "$binary" -w "$wlm" -D $diamond
+	python3 creator.py -p $processes -i "$inputfile" -f "$outfmt" -T $tool -t $threads -d "$database" -b "$binary" -w "$wlm" -D $diamond
 
 	echo "All codes are correctly generated!"
 	echo "Do you want to: (enter the number choice and press ENTER)"
