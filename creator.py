@@ -104,7 +104,7 @@ def fill_startbase(processes, threads, inputfile, outformat, diamond, tool, bina
             pass
         elif wlm == 'slurm':
             # Open the slurm_start_base.txt file in read mode
-            with open("./Bases/slurm_start_base.txt", "r") as f:
+            with open("./bases/slurm_start_base.txt", "r") as f:
                 # Write the content of slurm_start_base.txt to start.sh
                 start.write(f.read())
                 f.close()
@@ -112,7 +112,7 @@ def fill_startbase(processes, threads, inputfile, outformat, diamond, tool, bina
             pass
         
         # Open the start_base.txt file in read mode
-        with open("./Bases/start_base.txt", "r") as f:
+        with open("./bases/start_base.txt", "r") as f:
             # Read the content of start_base.txt
             base = f.read()
             # Format the base string with the given parameters
@@ -143,18 +143,18 @@ def fill_readbase(processes, threads, outformat, diamond, tool, binary, database
     # Open the read.py file in write mode
     with open("./read.py", "w") as read:
         # Read the blast_additional_options.txt file and replace newlines with spaces
-        with open("./Bases/blast_additional_options.txt", "r") as f:
+        with open("./bases/blast_additional_options.txt", "r") as f:
             bao = f.read().replace("\n", " ")
             f.close()
         
         # Read the diamond_additional_options.txt file and replace newlines with spaces
-        with open("./Bases/diamond_additional_options.txt", "r") as f:
+        with open("./bases/diamond_additional_options.txt", "r") as f:
             dao = f.read().replace("\n", " ")
             f.close()
         
         if wlm == 'slurm':
             # Read the slurm_partial_script_base.txt file and replace newlines with escaped newlines
-            with open("./Bases/slurm_partial_script_base.txt", "r") as f:
+            with open("./bases/slurm_partial_script_base.txt", "r") as f:
                 header = f.read().replace("\n", "\\n\" + \n\t\t\t\t\t\t \"")
                 f.close()
         elif wlm == 'htcondor':
@@ -193,13 +193,13 @@ def fill_controlscriptbase(wlm):
 
         elif wlm == 'slurm':
             # Open the slurm_controlscript_base.txt file in read mode
-            with open("./Bases/slurm_controlscript_base.txt", "r") as f:
+            with open("./bases/slurm_controlscript_base.txt", "r") as f:
                 # Write the contents of slurm_controlscript_base.txt to control_script.sh
                 control.write(f.read())
                 f.close()
 
             # Open the controlscript_base.txt file in read mode
-            with open("./Bases/controlscript_base.txt", "r") as f:
+            with open("./bases/controlscript_base.txt", "r") as f:
                 # Read the contents of controlscript_base.txt and format it with "sbatch"
                 base = f.read().format("sbatch")
                 # Write the formatted contents to control_script.sh
@@ -207,7 +207,7 @@ def fill_controlscriptbase(wlm):
                 f.close()
         else:
             # Open the controlscript_base.txt file in read mode
-            with open("./Bases/controlscript_base.txt", "r") as f:
+            with open("./bases/controlscript_base.txt", "r") as f:
                 # Read the contents of controlscript_base.txt and format it with "bash"
                 base = f.read().format("bash")
                 # Write the formatted contents to control_script.sh
