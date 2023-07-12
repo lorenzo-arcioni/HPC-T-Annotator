@@ -24,10 +24,6 @@ First, we start by cloning the repository into a folder on our filesystem on you
 ```sh
 git clone https://github.com/lorenzo-arcioni/HPC-Annotator
 ```
-So we extract the virtual environment.
-```sh
-tar -xf hpc-annotator.tar.gz && rm hpc-annotator.tar.gz
-```
 
 The software does not require an installation process.
 
