@@ -155,7 +155,7 @@ def fill_readbase(processes, threads, outformat, diamond, tool, binary, database
         if wlm == 'slurm':
             # Read the slurm_partial_script_base.txt file and replace newlines with escaped newlines
             with open("./Bases/slurm_partial_script_base.txt", "r") as f:
-                header = f.read().replace("\n", "\\n\" + \n\t\t\t\t\t\t \"")
+                header = f.read()
                 f.close()
         elif wlm == 'htcondor':
             pass
