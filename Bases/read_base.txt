@@ -16,6 +16,9 @@ def main():
 	threads    = "{}"
 	processes  =  {}
 	wlm        = "{}"
+	wlm_header = "{}"
+	dao        = "{}"
+	bao        = "{}"
 
 	pwd           = os.getcwd() # Get current path
 	generallog    = os.path.join(pwd, "general.log")
@@ -37,7 +40,7 @@ def main():
 	
 	# Adding the outformat to the final file
 	with open(pwd+"/final_blast.tsv", "w") as f:
-		outfmt_list = outformat[:-1].split(" ")
+		outfmt_list = outformat.split(" ")
 		f.write("\t".join(outfmt_list[1:]))
 		f.write("\n")
 		f.close()
@@ -57,7 +60,7 @@ def main():
 		with open("script.sh", 'w', encoding='utf-8') as script:
 			script.write("#!/bin/bash" + '\n')
 
-			script.write("{}") # Workload manager header
+			script.write(wlm_header) # Workload manager header
 
 			if wlm == "slurm":
 				script.write("#SBATCH --cpus-per-task=" + str(threads) + '\n')
@@ -67,10 +70,10 @@ def main():
 
 			if diamond:
 				script.write("/usr/bin/time -f \"%e\" " + binary + " " + tool + " -q contigs.fa -d " + database + " -o blast.out" + 
-												" -p " + str(threads) + " -f " + outformat + " " + "{}" + "\n") 
+												" -p " + str(threads) + " -f " + outformat + " " + dao + "\n") 
 			else:
 				script.write("/usr/bin/time -f \"%e\" " + binary + " -query contigs.fa -db " + database + " -out blast.out" +
-												" -num_threads " + str(threads) + " -outfmt \"" + outformat + "\" " + "{}" +"\n")
+												" -num_threads " + str(threads) + " -outfmt \"" + outformat + "\" " + bao +"\n")
 			script.write("touch finish_flag")
 			script.close()
 

@@ -156,13 +156,14 @@ then
 	else if [ "$choice" = "2" ]; then
 		case "$wlm" in
 			slurm)
-			tar -cf hpc_annotator.tar read.py start.sh time_calculator.py cancel.sh checker.sh control_script.sh monitor.sh slurm_error_checker.sh
+			tar -cf hpc-annotator.tar read.py start.sh time_calculator.py cancel.sh checker.sh control_script.sh monitor.sh slurm_error_checker.sh
 			;;
 			htcondor)
 			echo "Work in progress!!"
+			echo "This choice is not available."
 			;;
 			none)
-			tar -cf hpc_annotator.tar read.py start.sh time_calculator.py control_script.sh
+			tar -cf hpc-annotator.tar read.py start.sh time_calculator.py control_script.sh
 			;;
 		esac 
 		rm  read.py start.sh control_script.sh
