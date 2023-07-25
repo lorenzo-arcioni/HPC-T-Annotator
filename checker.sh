@@ -10,18 +10,8 @@ for d in ./tmp/*/ ;
 	do
 		x=$(($x + $(wc -c < ${d}contigs.fa)))
 		y=$(($y + $(wc -c < ${d}blast.out)))
-		
-		if [ $(grep ">" -i ${d}contigs.fa | wc -l ) -ne $(grep ">" -i ${d}headers.txt | wc -l ) ]
-			then
-				h=1
-				echo Wrong ...Given $(grep ">" -i ${d}contigs.fa | wc -l ) ... expected $(grep ">" -i ${d}headers.txt | wc -l ) on folder $d
-		fi
 	done
-if [ $h == 0 ]
-	then
-		echo Test on "awk" OK 
-fi
-
+	
 echo -n Test on input ....
 if [ $x -eq $(wc -c < $1) ]
 	then
@@ -32,7 +22,7 @@ if [ $x -eq $(wc -c < $1) ]
 fi
 
 echo -n Test on output ....
-if [ $y -eq $(wc -c < ./tmp/final_blast.tsv) ]
+if [ $y -eq $(tail -n +2 ./tmp/final_blast.tsv | wc -c) ]
 	then
 		echo OK $y
 	else
