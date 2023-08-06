@@ -31,7 +31,11 @@ date1=$(grep "Starting timestamp#" -i ./general.log | tail -1 | cut -d"#" -f 2)
 date2=$(date +'%Y-%m-%d %H:%M:%S')
 echo "Ending timestamp#"$date2 >> ./general.log
 diff=$(($(date -d "$date2" +'%s') - $(date -d "$date1" +'%s')))
-echo "Total elapsed time: "$(date -d @$diff -u +%H:%M:%S) >> ./general.log
+
+days=$((diff / 86400))
+remaining_seconds=$((diff % 86400))
+
+echo "Total elapsed time: "$(date -d "@$remaining_seconds" -u "+${days} days, %H:%M:%S") >> ./general.log
 #./checker.sh input/input.fa > ./errors.log
 date -u -d @$(($(date -d "$date2" '+%s') - $(date -d "$date1" '+%s'))) '+%T'
 echo '-------------------------------------------------' >> ./general.log
