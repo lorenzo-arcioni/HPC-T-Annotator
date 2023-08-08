@@ -5,7 +5,7 @@
 # HPC-Annotator
 ## Introduction
 
-HPC Annotator is a parallelization tool that increases the performance of BLAST and Diamond annotation software. 
+HPC Annotator is a parallelization tool that increases the performance of BLAST and Diamond alignment software. 
 
 The software was developed to be used on large clusters with high performance and not overloaded. If the cluster where it runs is overloaded and the jobs fail to start simultaneously, there will be a considerable degradation in performance.
 
