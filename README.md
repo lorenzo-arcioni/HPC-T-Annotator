@@ -2,14 +2,14 @@
 ![License MIT](https://img.shields.io/badge/license-MIT-success)
 ![Release Latest](https://img.shields.io/badge/release-latest-blue)
 
-# HPC-Annotator
+# HPC-T-Annotator
 ## Introduction
 
-HPC Annotator is a parallelization tool that increases the performance of BLAST and Diamond alignment software. 
+HPC-T-Annotator is a parallelization tool that increases the performance of BLAST and Diamond alignment software. 
 
 The software was developed to be used on large clusters with high performance and not overloaded. If the cluster where it runs is overloaded and the jobs fail to start simultaneously, there will be a considerable degradation in performance.
 
-Visit the  <a href="https://github.com/lorenzo-arcioni/HPC-Annotator/wiki">Wiki</a> page for futher informations!
+Visit the  <a href="https://github.com/lorenzo-arcioni/HPC-T-Annotator/wiki">Wiki</a> page for futher informations!
 
 ## Installation
 ### Prerequisites
@@ -22,7 +22,7 @@ If you are running on a cluster (where usually several versions are available) m
 ### Get started
 First, we start by cloning the repository into a folder on our filesystem on your local machine (can be also the cluster).
 ```sh
-git clone https://github.com/lorenzo-arcioni/HPC-Annotator
+git clone https://github.com/lorenzo-arcioni/HPC-T-Annotator
 ```
 
 The software does not require an installation process.
@@ -76,7 +76,7 @@ In this case we have split the computation into 100 jobs using the BLAST suite.
 ### Execution on HPC machine
 So we extract the generated code.
 ```sh
-tar -xf hpc-annotator.tar && rm hpc-annotator.tar
+tar -xf hpc-t-annotator.tar && rm hpc-t-annotator.tar
 ```
 Once this is done, you have everything you need to manage and start the computation, so all you have to do is run (if you are on Slurm):
 
