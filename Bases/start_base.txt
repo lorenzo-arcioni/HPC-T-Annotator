@@ -13,9 +13,9 @@ database="{}"
 #########################
 rm -rf ./input; mkdir input
 cp "$inputfile" ./input/input.fa
-inputfile="./input/input.fa"
-dos2unix "$inputfile"
-grep ">" -i "$inputfile" > headers.txt
+infile="./input/input.fa"
+dos2unix "$infile"
+grep ">" -i "$infile" > headers.txt
 #########################
 
 #Updating log file
