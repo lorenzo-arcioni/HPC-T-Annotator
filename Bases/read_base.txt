@@ -50,12 +50,15 @@ def main():
 		os.mkdir(str(p))
 		os.chdir(str(p))
 
-		with open("creator.awk", 'w', encoding='utf-8') as f:
+		with open("headers.txt", 'w', encoding='utf-8') as f:
 			p_keys = [keys[x] for x in range(len(keys)) if x % processes == p]
 
 			for k in p_keys:
-				f.write("$0 == \"" + k + "\"{{print $0; while(getline == 1 && substr($1,1,1) != \">\" ){{print $0}}}}\n")
+				f.write(k + "\n")
 			f.close()
+		
+		shutil.copyfile("../../splitter.py", "splitter.py")
+
 		
 		with open("script.sh", 'w', encoding='utf-8') as script:
 			script.write("#!/bin/bash" + '\n')
@@ -66,7 +69,7 @@ def main():
 				script.write("#SBATCH --cpus-per-task=" + str(threads) + '\n')
 				script.write("#SBATCH --job-name=PA_proc-" + str(p) + '\n')
 
-			script.write("awk -f ./creator.awk " + inputfile + " > contigs.fa\n")
+			script.write("python3 splitter.py\n")
 
 			if diamond:
 				script.write("/usr/bin/time -f \"%e\" " + binary + " " + tool + " -q contigs.fa -d " + database + " -o blast.out" + 

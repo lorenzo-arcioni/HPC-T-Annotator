@@ -35,7 +35,7 @@ diff=$(($(date -d "$date2" +'%s') - $(date -d "$date1" +'%s')))
 days=$((diff / 86400))
 remaining_seconds=$((diff % 86400))
 
-echo "Total elapsed time: "$(date -d "@$remaining_seconds" -u "+${days} days, %H:%M:%S") >> ./general.log
+echo "Total elapsed time: "$(date -d "@$remaining_seconds" -u "+${{days}} days, %H:%M:%S") >> ./general.log
 #./checker.sh input/input.fa > ./errors.log
 date -u -d @$(($(date -d "$date2" '+%s') - $(date -d "$date1" '+%s'))) '+%T'
 echo '-------------------------------------------------' >> ./general.log
