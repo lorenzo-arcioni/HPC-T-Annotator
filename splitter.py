@@ -1,13 +1,14 @@
 def get_multiple_strand_from_fasta(path: str):
 	'''
-	Prende in input il file multifasta, dopo di chè per ogni gene aggiunge in un dizionario
-	l'entry che ha per chiave il nome del gene e per valore la stringa fasta
+	Takes input from a multifasta file, then for each gene, adds an entry to a dictionary where the key is the gene name and the value is the fasta string.
+
 	Arguments:
-	    path: str
-		il path del file
+		path: str
+			The file path
+
 	Returns:
-	    ret: dict
-		il dizionario costruito
+		ret: dict
+			The constructed dictionary
 	'''
 	
 	last_header = None
