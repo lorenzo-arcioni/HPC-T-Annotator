@@ -22,7 +22,13 @@ If you are running on a cluster (where usually several versions are available) m
 ### Get started
 First, we start by cloning the repository into a folder on our filesystem on your local machine (can be also the cluster).
 ```sh
-git clone https://github.com/lorenzo-arcioni/HPC-T-Annotator
+wget https://github.com/lorenzo-arcioni/HPC-T-Annotator/releases/download/v1/hpc-t-annotator.tar.gz
+```
+
+And then extract it!
+
+```sh
+tar -xvzf hpc-t-annotator.tar.gz && rm hpc-t-annotator.tar.gz
 ```
 
 The software does not require an installation process.
@@ -40,6 +46,9 @@ There are several options available
     Path to the binary file (Diamond or BLAST). 
 - `-T <function>`
     blastp and blastx are available.
+
+#### Recomended options
+....
 
 #### BLAST/Diamond further options
 It is of course possible to give further options to the BLAST and Diamond software, this is done via prepared files located in the **Bases** directory.

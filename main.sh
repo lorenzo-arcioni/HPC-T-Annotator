@@ -115,6 +115,7 @@ echo Input file: $inputfile
 echo Output format: $outfmt
 echo Tool: $tool
 echo Threads: $threads
+echo "Diamond: $(($diamond == 1 ? "yes" : "no"))"
 echo Database: $database
 echo Binary path: $binary
 echo Workload manager: $wlm

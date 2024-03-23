@@ -56,7 +56,7 @@ def init():
 		outformat = options.outformat
 
 	if options.diamond != None:
-		diamond = 1
+		diamond = int(options.diamond)
 
 	if options.binary != None:
 		binary = options.binary
