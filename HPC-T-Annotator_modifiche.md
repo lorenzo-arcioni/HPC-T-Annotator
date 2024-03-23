@@ -25,3 +25,8 @@
 | 21 | Sarebbe comodo lasciare il file scaricabile sul server raganella per 15 minuti... e rilasciare a video un link in cui prenderlo. | | |
 | 22 | Il colore di header, secondo me, è troppo scuro. Sarebbe meglio mettere un colore chiaro (magari non troppo saturo); ma questo è un gusto personale. Inoltre andrebbe usato un simbolo. Quando vedi Microsoft, Apple, Fiat, Nike troverai sempre un simbolo. Lo so che non sei un grafico, ma un simbolo serve. Pensiamoci. | | |
 | 23 | Dare la possibilità all'utente di poter dare un path di una directory di databases e non solo di uno singolo. | | |
+| 24 | Chiarire meglio il fatto che il software è pensato per funzionare tramite interfaccia grafica. | | |
+| 25 | Assegnare un DOI alla repository GitHub. Citandola nell'articolo.| | |
+| 26 | Fare ulteriori test sia con BLAST sia con DIAMOND in locale e su macchina HPC. | | |
+| 27 | Assicurarsi che ogni notebook in questione sia ben auto-documentato e che funzioni correttamente. | | |
+| 28 | Potrebbe essere di aiuto un tutorial (o video-tutorial) che spieghi il funzionamento dell'intera pipeline di annotazione. | | |
