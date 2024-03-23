@@ -6,13 +6,8 @@ while [ $(ls -l ./tmp | grep '^d' | wc -l) != $(ls -l ./tmp/*/finish_flag 2>/dev
 do
 	end_time=$(date +%s)
 	
-	#If my running time > 1 hours
-	if [ $(( end_time - start_time )) -gt 3600 ]
-		then
-			#Launch my clone
-			{} ./control_script.sh
-			exit 0
-	fi
+	{}
+	
 	sleep 5
 done
 

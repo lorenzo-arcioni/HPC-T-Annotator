@@ -1,7 +1,5 @@
 import sys
 import os
-import random
-import string
 from optparse import OptionParser
 import subprocess as sp
 
@@ -100,14 +98,15 @@ def fill_startbase(processes, threads, inputfile, outformat, diamond, tool, bina
         start.write("#!/bin/bash" + '\n\n')
         
         # Check the workload manager type
-        if wlm == 'htcondor':
-            pass
-        elif wlm == 'slurm':
+        if wlm == 'slurm':
             # Open the slurm_start_base.txt file in read mode
             with open("./Bases/slurm_start_base.txt", "r") as f:
                 # Write the content of slurm_start_base.txt to start.sh
                 start.write(f.read())
                 f.close()
+
+        elif wlm == 'htcondor':
+             pass
         else:
             pass
         
@@ -157,6 +156,7 @@ def fill_readbase(processes, threads, outformat, diamond, tool, binary, database
             with open("./Bases/slurm_partial_script_base.txt", "r") as f:
                 header = f.read().replace("\n", "\\n")
                 f.close()
+
         elif wlm == 'htcondor':
             pass
         else:
@@ -188,10 +188,7 @@ def fill_controlscriptbase(wlm):
         # Write the shebang line
         control.write("#!/bin/bash\n\n")
 
-        if wlm == 'htcondor':
-            pass
-
-        elif wlm == 'slurm':
+        if wlm == 'slurm':
             # Open the slurm_controlscript_base.txt file in read mode
             with open("./Bases/slurm_controlscript_base.txt", "r") as f:
                 # Write the contents of slurm_controlscript_base.txt to control_script.sh
@@ -201,10 +198,18 @@ def fill_controlscriptbase(wlm):
             # Open the controlscript_base.txt file in read mode
             with open("./Bases/controlscript_base.txt", "r") as f:
                 # Read the contents of controlscript_base.txt and format it with "sbatch"
-                base = f.read().format("sbatch")
+                base = f.read().format("#If my running time > 1 hours\n"+
+	                                       "        if [ $(( end_time - start_time )) -gt 3600 ]\n"+
+                                           "        then\n"+
+                                           "        #Launch my clone\n"+
+                                           "            sbatch ./control_script.sh\n"+
+                                           "            exit 0\n"+
+                                           "        fi\n\n")
                 # Write the formatted contents to control_script.sh
                 control.write(base)
                 f.close()
+        elif wlm == 'htcondor':
+             pass
         else:
             # Open the controlscript_base.txt file in read mode
             with open("./Bases/controlscript_base.txt", "r") as f:

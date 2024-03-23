@@ -30,3 +30,4 @@
 | 26 | Fare ulteriori test sia con BLAST sia con DIAMOND in locale e su macchina HPC. | | |
 | 27 | Assicurarsi che ogni notebook in questione sia ben auto-documentato e che funzioni correttamente. | | |
 | 28 | Potrebbe essere di aiuto un tutorial (o video-tutorial) che spieghi il funzionamento dell'intera pipeline di annotazione. | | |
+| 29 | Permettere all'utente di inserire un job name. | | |

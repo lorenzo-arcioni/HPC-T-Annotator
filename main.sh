@@ -3,7 +3,7 @@
 
 #Use it to automate the running of the start.sh
 usage="$(basename "$0") -i inputfile [-h] [-p number_of_processes] \
-[-f blastx_out_fotmat] [-d database path] [-D] [--slurm] [--htcondor]\
+[-f blastx_out_fotmat] [-d database path] [-D] [--slurm]\
 [-T used tools] [-b binary of executable] [-t threads]\
 -- parallel annotation application with Blast/Diamond tool"
 
@@ -30,9 +30,6 @@ do
 			case "${OPTARG}" in
 				slurm)
 				wlm='slurm'
-				;;
-				htcondor)
-				wlm='htcondor'
 				;;
 				* )
 				echo printf "illegal option: -%s\n" "$OPTARG" >&2
@@ -94,14 +91,15 @@ then
 	exit 2
 fi
 
-#Calculate the number of sequences
-sequences=$(grep ">" -i "$inputfile" -c)
 if [ -z "$processes" ]
 then
 	echo "Insert the number of processes (must be less or equal to the number of sequences in the input file)" >&2
 	echo $usage
 	exit 2
 fi
+
+#Calculate the number of sequences
+sequences=$(grep ">" -i "$inputfile" -c)
 
 if [ $processes -gt $sequences ]
 then
@@ -135,7 +133,7 @@ then
 	python3 creator.py -p $processes -i "$inputfile" -f "$outfmt" -T $tool -t $threads -d "$database" -b "$binary" -w "$wlm" -D $diamond
 
 	echo "All codes are correctly generated!"
-	echo "Do you want to: (enter the number choice and press ENTER)"
+	echo "Do you want to: (enter the number of your choice and press ENTER)"
 	echo "1) Exec your code rigth now (on this machine)"
 	echo "2) Generate tar file to upload on a remote machine"
 	echo "3) Exit"
@@ -147,7 +145,7 @@ then
 				sbatch --export=ALL,processes=$processes,threads=$threads,inputfile=$inputfile,outfmt="$outfmt",diamond=$diamond,tool=$tool,binary=$binary,database=$database start.sh
 				;;
 				htcondor)
-				echo "Work in progress!!"
+				echo "Work in progress!! This workload manager isn't supported yet." >&2
 				;;
 				none)
 				export processes=$processes threads=$threads inputfile=$inputfile outfmt="$outfmt" diamond=$diamond binary=$binary database=$database tool=$tool && ./start.sh
@@ -159,8 +157,7 @@ then
 			tar -cf hpc-t-annotator.tar read.py start.sh time_calculator.py control_script.sh splitter.py
 			;;
 			htcondor)
-			echo "Work in progress!!"
-			echo "This choice is not available."
+			echo "Work in progress!! This choice is not available." >&2
 			;;
 			none)
 			tar -cf hpc-t-annotator.tar read.py start.sh time_calculator.py control_script.sh splitter.py

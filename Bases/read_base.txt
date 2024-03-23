@@ -7,7 +7,7 @@ from datetime import datetime
 		
 def main():
 
-	outformat  = {}
+	outformat  =  {}
 	inputfile  = "../../input/input.fa"
 	diamond    =  {}
 	binary     = "{}"
