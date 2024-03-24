@@ -166,7 +166,7 @@ def fill_readbase(processes, threads, outformat, diamond, tool, binary, database
         with open("./Bases/read_base.txt", "r") as b:
             base = b.read()
             # Format the base with the given parameters
-            base = base.format(outformat, diamond, binary, database, tool, threads, processes, wlm, header, dao, bao)
+            base = base.format(outformat, diamond, binary, database, tool, threads, processes, wlm, header, dao, bao, "")
             # Write the formatted base to the read.py file
             read.write(base)
 
@@ -214,7 +214,7 @@ def fill_controlscriptbase(wlm):
             # Open the controlscript_base.txt file in read mode
             with open("./Bases/controlscript_base.txt", "r") as f:
                 # Read the contents of controlscript_base.txt and format it with "bash"
-                base = f.read().format("bash")
+                base = f.read().format("")
                 # Write the formatted contents to control_script.sh
                 control.write(base)
                 f.close()

@@ -11,6 +11,8 @@ The software was developed to be used on large clusters with high performance an
 
 Visit the  <a href="https://github.com/lorenzo-arcioni/HPC-T-Annotator/wiki">Wiki</a> page for futher informations!
 
+There exists a graphical web interface that semplifies all this boring IT stuff. If you want to use it, please go [here](http://raganella.deb.unitus.it:49152). Else, for command line execution pipeline, read **carefully** instructions below.
+
 ## Installation
 ### Prerequisites
 
@@ -20,7 +22,7 @@ Visit the  <a href="https://github.com/lorenzo-arcioni/HPC-T-Annotator/wiki">Wik
 If you are running on a cluster (where usually several versions are available) make sure to load a given Python 3 version.
 
 ### Get started
-First, we start by cloning the repository into a folder on our filesystem on your local machine (can be also the cluster).
+First, we start by getting the last software release and download it into a folder on our filesystem on your local machine (can be also the cluster).
 ```sh
 wget https://github.com/lorenzo-arcioni/HPC-T-Annotator/releases/download/v1/hpc-t-annotator.tar.gz
 ```
@@ -31,7 +33,7 @@ And then extract it!
 tar -xvzf hpc-t-annotator.tar.gz && rm hpc-t-annotator.tar.gz
 ```
 
-The software does not require an installation process.
+The software does not require a further installation process.
 
 ## Running
 ### Options for command-line execution
@@ -48,7 +50,10 @@ There are several options available
     blastp and blastx are available.
 
 #### Recomended options
-....
+- `-p <number of processes>`
+    Number of processes to split the computation into.
+- `-t <threads>`
+    The number of threads that each process can use. 
 
 #### BLAST/Diamond further options
 It is of course possible to give further options to the BLAST and Diamond software, this is done via prepared files located in the **Bases** directory.
@@ -57,15 +62,21 @@ Simply add the options in the respective file, depending on which tool you are u
 - `blast_additional_options.txt`
 - `diamond_additional_options.txt`
 
-For example in the diamond additional options file we can insert:
+For example, in the diamond additional options file, we can insert:
 ```sh
 --ultra-sensitive --quiet
 ```
 It is **mandatory** to enter the options all on one line.
 
 ## Execution pipeline example
-After cloning the repository and extracting the TAR archive, you can proceed as follows: perform the code generation phase, upload (if necessary) the generated TAR package to the HPC machine, and then start the computation.
+Once you have downloaded and extracted the TAR archive, you can proceed as follows: perform the code generation phase, upload (if necessary) the generated TAR package to the HPC machine, and then start the computation.
+
 ### Generation of code
+
+#### Interface generation
+
+For GUI code generation, please visit the project [website](http://raganella.deb.unitus.it:49152).
+
 #### Command-line generation
 A command-line example using the diamond suite.
 ```sh
@@ -75,15 +86,13 @@ In this case, we will divide the computation (and the input file) into 50 parts 
 
 An other example using the BLAST
 ```sh
-./main.sh -i ../project/assembly/slow_fast_degs_hs.fasta -b /home/blast/blastx -T blastx -t 48 -d /home/user/DB/nr -p 100
+./main.sh -i /home/user/project/assembly/slow_fast_degs_hs.fasta -b /home/blast/blastx -T blastx -t 48 -d /home/user/DB/nr -p 100
 ```
 
 In this case we have split the computation into 100 jobs using the BLAST suite.
 
-#### Interface generation
-
 ### Execution on HPC machine
-So we extract the generated code.
+So we extract the generated code (if necessary).
 ```sh
 tar -xf hpc-t-annotator.tar && rm hpc-t-annotator.tar
 ```
@@ -92,16 +101,24 @@ Once this is done, you have everything you need to manage and start the computat
 ```sh
 sbatch start.sh
 ```
-Or (if you are on HTCondor):
+
+It is **very important** that *sbatch* command is run in the same directory of .sh file; and **not** "sbatch /some/other/path/start.sh".
+
+
+Or 
+
 ```sh
-condor_submit start.sh
+nohup start.sh 1> start.out 2> start.err &
 ```
+
+if you are not using a wokload manager.
+
 
 At the end of the calculation, the output will be in the **tmp** directory with the name **final_blast.tsv**.
 
 ## License
 
-Copyright (c) 2023 Lorenzo Arcioni
+Copyright © 2024 Lorenzo Arcioni
 
 Permission is hereby granted, free of charge, to any person
 obtaining a copy of this software and associated documentation

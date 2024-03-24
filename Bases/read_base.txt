@@ -19,6 +19,7 @@ def main():
 	wlm_header = "{}"
 	dao        = "{}"
 	bao        = "{}"
+	job_name   = "{}"
 
 	pwd           = os.getcwd() # Get current path
 	generallog    = os.path.join(pwd, "general.log")
@@ -67,7 +68,7 @@ def main():
 
 			if wlm == "slurm":
 				script.write("#SBATCH --cpus-per-task=" + str(threads) + '\n')
-				script.write("#SBATCH --job-name=PA_proc-" + str(p) + '\n')
+				script.write("#SBATCH --job-name=" + job_name + "-" + str(p) + '\n')
 
 			script.write("python3 splitter.py\n")
 
@@ -101,7 +102,7 @@ def main():
 	elif wlm == "htcondor":
 		pass
 	else:
-		sp.call("bash ./control_script.sh", shell=True)
+		sp.call("bash ./control_script.sh 2>control.err", shell=True)
 	
 if __name__ == '__main__':
     sys.exit(main())
