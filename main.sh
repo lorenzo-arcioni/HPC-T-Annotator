@@ -25,18 +25,18 @@ do
         b) binary=$OPTARG;;
         T) tool=$OPTARG;;
         d) database=$OPTARG;;
-		-)
-			case "${OPTARG}" in
-				slurm)
-				wlm='slurm'
-				;;
-				* )
-				echo printf "illegal option: -%s\n" "$OPTARG" >&2
-					echo "$usage" >&2
-					exit 1
-				;;
-			esac
-			;;
+        -)
+	        case "${OPTARG}" in
+		        slurm)
+		        wlm='slurm'
+		        ;;
+		        * )
+		        echo printf "illegal option: -%s\n" "$OPTARG" >&2
+			        echo "$usage" >&2
+			        exit 1
+		        ;;
+	        esac
+	        ;;
 
         :) printf "missing argument for -%s\n" "$OPTARG" >&2
 			echo "$usage" >&2
