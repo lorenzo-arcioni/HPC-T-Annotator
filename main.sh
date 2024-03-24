@@ -21,11 +21,10 @@ do
         f) outfmt="\"${OPTARG}\"";;
         D) diamond=1;;
         p) processes=$OPTARG;;
-		t) threads=$OPTARG;;
+        t) threads=$OPTARG;;
         b) binary=$OPTARG;;
         T) tool=$OPTARG;;
         d) database=$OPTARG;;
-
 		-)
 			case "${OPTARG}" in
 				slurm)
@@ -140,17 +139,17 @@ then
 	read choice
 
 	if [ "$choice" = "1" ]; then
-			case "$wlm" in
-				slurm)
-				sbatch --export=ALL,processes=$processes,threads=$threads,inputfile=$inputfile,outfmt="$outfmt",diamond=$diamond,tool=$tool,binary=$binary,database=$database start.sh
-				;;
-				htcondor)
-				echo "Work in progress!! This workload manager isn't supported yet." >&2
-				;;
-				none)
-				export processes=$processes threads=$threads inputfile=$inputfile outfmt="$outfmt" diamond=$diamond binary=$binary database=$database tool=$tool && ./start.sh
-				;;
-			esac
+		case "$wlm" in
+			slurm)
+			sbatch --export=ALL,processes=$processes,threads=$threads,inputfile=$inputfile,outfmt="$outfmt",diamond=$diamond,tool=$tool,binary=$binary,database=$database start.sh
+			;;
+			htcondor)
+			echo "Work in progress!! This workload manager isn't supported yet." >&2
+			;;
+			none)
+			export processes=$processes threads=$threads inputfile=$inputfile outfmt="$outfmt" diamond=$diamond binary=$binary database=$database tool=$tool && ./start.sh
+			;;
+		esac
 	else if [ "$choice" = "2" ]; then
 		case "$wlm" in
 			slurm)
