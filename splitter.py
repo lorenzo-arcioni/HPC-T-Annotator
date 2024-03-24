@@ -21,14 +21,14 @@ def get_multiple_strand_from_fasta(path: str):
 	lista = list(filter(lambda a: a != "", lista))
 	
 	for line in lista:
-		# se inizia con '>' è una nuova sequenza
+		# If the line starts with '>', it's a header
 		if line[0] == '>': 
-			# prendo il nome del gene
+			# Take the header name
 			last_header = line
-			ret[last_header] = "" # inizializzo il suo valore nel dizionario
-		# se non inizia con '>' è un pezzo di sequenza
+			ret[last_header] = "" # Initialize the value to an empty string
+		# If the line doesn't start with '>', it's a sequence
 		else:
-			ret[last_header] += line # Aggiungo la sequenza all'ultimo gene trovato
+			ret[last_header] += line # Add the sequence to the last header
 	return ret
 
 headers = []
