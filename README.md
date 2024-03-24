@@ -22,8 +22,9 @@ There exists a graphical web interface that semplifies all this boring IT stuff.
 If you are running on a cluster (where usually several versions are available) make sure to load a given Python 3 version.
 
 ### Get started
-First, we start by getting the last software release and download it into a folder on our filesystem on your local machine (can be also the cluster).
+First, we start by getting the last software release and download it into an empty directory on our filesystem on your local machine (can be also the cluster).
 ```sh
+cd empty_directory
 wget https://github.com/lorenzo-arcioni/HPC-T-Annotator/releases/download/v1/hpc-t-annotator.tar.gz
 ```
 
@@ -48,16 +49,14 @@ There are several options available
     Path to the binary file (Diamond or BLAST). 
 - `-T <function>`
     blastp and blastx are available.
-
-#### Recomended options
 - `-p <number of processes>`
     Number of processes to split the computation into.
 - `-t <threads>`
     The number of threads that each process can use. 
 
 #### BLAST/Diamond further options
-It is of course possible to give further options to the BLAST and Diamond software, this is done via prepared files located in the **Bases** directory.
-Simply add the options in the respective file, depending on which tool you are using BLAST or Diamond.
+It is of course possible to give further options to the BLAST and Diamond software. This is done via prepared files located in the **Bases** directory.
+Simply add one-line options in the respective file, depending on which tool you are using BLAST or Diamond.
 
 - `blast_additional_options.txt`
 - `diamond_additional_options.txt`
@@ -69,7 +68,7 @@ For example, in the diamond additional options file, we can insert:
 It is **mandatory** to enter the options all on one line.
 
 ## Execution pipeline example
-Once you have downloaded and extracted the TAR archive, you can proceed as follows: perform the code generation phase, upload (if necessary) the generated TAR package to the HPC machine, and then start the computation.
+Once you have downloaded and extracted the TAR archive, you can proceed as follows: perform the code generation phase, upload (if necessary) the generated TAR package to the HPC machine, and then start the computation. For code generation, GUI is highly recomended!
 
 ### Generation of code
 
