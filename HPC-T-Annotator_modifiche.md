@@ -3,7 +3,7 @@
 | Numero | Azione | Richiede Benchmark | Eseguita |
 |--------|--------|-----------------|----------|
 | 1 | Inserire opzione Output Directory nell'interfaccia (o in alternativa fornire il path nel quale trovare il file di output). | | |
-| 2 | Consentire all'utente l'aggiunta di un basename per il file tar (Il nome del file scaricabile TAR dovrebbe avere come postfisso un time stamp.). | | |
+| 2 | Consentire all'utente l'aggiunta di un basename per il file tar (Il nome del file scaricabile TAR dovrebbe avere come postfisso un time stamp.). | | FATTO |
 | 3 | Specificare nell'articolo che la sezione di Download si riferisce alla versione del software da riga di comando. | | FATTO |
 | 4 | Modificare il nome della sezione ? in Tool ? | | |
 | 5 | Aggiornare le immagini in maniera coerente con l'interfaccia. | | |
@@ -27,7 +27,7 @@
 | 23 | Dare la possibilità all'utente di poter dare un path di una directory di databases e non solo di uno singolo. | | |
 | 24 | Chiarire meglio il fatto che il software è pensato per funzionare tramite interfaccia grafica. | | |
 | 25 | Assegnare un DOI alla repository GitHub. Citandola nell'articolo.| | |
-| 26 | Fare ulteriori test sia con BLAST sia con DIAMOND in locale e su macchina HPC. | | |
+| 26 | Fare ulteriori test sia con BLAST sia con DIAMOND in locale e su macchina HPC. | | FATTO |
 | 27 | Assicurarsi che ogni notebook in questione sia ben auto-documentato e che funzioni correttamente. | | |
 | 28 | Potrebbe essere di aiuto un tutorial (o video-tutorial) che spieghi il funzionamento dell'intera pipeline di annotazione. | | |
-| 29 | Permettere all'utente di inserire un job name. | | |
+| 29 | Permettere all'utente di inserire un job name. | | FATTO |

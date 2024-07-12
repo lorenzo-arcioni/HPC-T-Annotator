@@ -11,7 +11,7 @@ The software was developed to be used on large clusters with high performance an
 
 Visit the  <a href="https://github.com/lorenzo-arcioni/HPC-T-Annotator/wiki">Wiki</a> page for futher informations!
 
-There exists a graphical web interface that semplifies all this boring IT stuff. If you want to use it, please go [here](http://raganella.deb.unitus.it:49152). Else, for command line execution pipeline, read **carefully** instructions below.
+There exists a graphical web interface that semplifies all this boring IT stuff. If you want to use it, please go [here](http://raganella.deb.unitus.it/HPC-T-Annotator/index.html). Else, for command line execution pipeline, read **carefully** instructions below.
 
 ## Installation
 ### Prerequisites
@@ -67,6 +67,18 @@ For example, in the diamond additional options file, we can insert:
 ```
 It is **mandatory** to enter the options all on one line.
 
+#### SLURM Execution Configuration
+
+Regarding the execution of HPC-T-Annotator on an HPC cluster with SLURM as the workload manager, the user must ensure to properly configure all the configuration files that reside in the Bases folder, namely:
+
+- `slurm_controlscript_base.txt`
+- `slurm_partial_script_base.txt`
+- `slurm_start_base.txt`
+
+Remember to properly configure these files, as failure to do so may compromise the entire execution.
+
+Please note that for execution through the SLURM workload manager, it is necessary to provide the **--slurm** option in the command line when running the **main.sh script**.
+
 ## Execution pipeline example
 Once you have downloaded and extracted the TAR archive, you can proceed as follows: perform the code generation phase, upload (if necessary) the generated TAR package to the HPC machine, and then start the computation. For code generation, GUI is highly recomended!
 
@@ -74,7 +86,7 @@ Once you have downloaded and extracted the TAR archive, you can proceed as follo
 
 #### Interface generation
 
-For GUI code generation, please visit the project [website](http://raganella.deb.unitus.it:49152).
+For GUI code generation, please visit the project [website](http://raganella.deb.unitus.it/HPC-T-Annotator/index.html).
 
 #### Command-line generation
 A command-line example using the diamond suite.
