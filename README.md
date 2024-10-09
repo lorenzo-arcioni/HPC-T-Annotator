@@ -127,6 +127,11 @@ if you are not using a wokload manager.
 
 At the end of the calculation, the output will be in the **tmp** directory with the name **final_blast.tsv**.
 
+## Citation
+When using the tool in published research, please cite:
+
+- Arcioni, L., Arcieri, M., Martino, J.D. et al. HPC-T-Annotator: an HPC tool for de novo transcriptome assembly annotation. BMC Bioinformatics 25, 272 (2024). https://doi.org/10.1186/s12859-024-05887-3
+
 ## License
 
 Copyright © 2024 Lorenzo Arcioni
