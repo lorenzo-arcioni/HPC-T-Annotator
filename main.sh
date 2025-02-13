@@ -7,7 +7,7 @@ usage="$(basename "$0") -i inputfile [-h] [-p number_of_processes] \
 [-T used tools] [-b binary of executable] [-t threads]\
 -- parallel annotation application with Blast/Diamond tool"
 
-outfmt="\"6 qseqid sseqid slen qstart qend length mismatch gapopen gaps sseq\""
+outfmt="\"6 qseqid sseqid slen qstart qend length mismatch stitle gapopen gaps sseq\""
 
 diamond=0
 wlm='none'
